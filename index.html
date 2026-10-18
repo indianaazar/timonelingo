@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Timonel YCN - Timonelingo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Nunito', sans-serif; user-select: none; }
+    .btn-3d {
+      transition: all 0.08s ease-in-out;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.18);
+    }
+    .btn-3d:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.18);
+    }
+    .interactive-zone {
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .interactive-zone:hover {
+      filter: drop-shadow(0 0 6px rgba(14, 165, 233, 0.8));
+      opacity: 0.85;
+    }
+    .interactive-zone:active {
+      transform: scale(0.97);
+    }
+    .flashcard {
+      perspective: 1000px;
+    }
+    .flashcard-inner {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex justify-center">
+
+  <div class="w-full max-w-md bg-white min-h-screen flex flex-col shadow-2xl relative pb-20">
+    
+    <!-- ENCABEZADO GAMIFICADO ESTILO DUOLINGO -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b-2 border-slate-200 px-4 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-sky-600 text-white flex items-center justify-center font-black text-lg shadow-sm">
+          ⛵
+        </div>
+        <div>
+          <h1 class="text-sm font-black leading-none text-sky-800">TIMONEL YCN</h1>
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Manual Oficial Completo (4 Partes)</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3 text-xs font-black">
+        <div class="flex items-center gap-1 text-amber-500 bg-amber-50 px-2 py-1 rounded-full border border-amber-200">
+          <span>🔥</span><span id="statStreak">5</span>
+        </div>
+        <div class="flex items-center gap-1 text-sky-500 bg-sky-50 px-2 py-1 rounded-full border border-sky-200">
+          <span>💎</span><span id="statPoints">650</span>
+        </div>
+        <div class="flex items-center gap-1 text-rose-500 bg-rose-50 px-2 py-1 rounded-full border border-rose-200">
+          <span>❤️</span><span id="statLives">5</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main id="appContainer" class="flex-1 flex flex-col p-4 overflow-y-auto"></main>
+
+    <!-- NAVEGACIÓN INFERIOR DE PESTAÑAS -->
+    <nav class="fixed bottom-0 max-w-md w-full bg-white border-t-2 border-slate-200 px-3 py-2 flex justify-around items-center z-50">
+      <button onclick="app.setTab('map')" id="nav-map" class="flex flex-col items-center gap-1 text-sky-600 font-extrabold text-[11px] p-1">
+        <span class="text-xl">🗺️</span> Temario YCN
+      </button>
+      <button onclick="app.setTab('tactile')" id="nav-tactile" class="flex flex-col items-center gap-1 text-slate-400 font-extrabold text-[11px] p-1">
+        <span class="text-xl">🎯</span> Reconocimiento
+      </button>
+      <button onclick="app.setTab('flashcards')" id="nav-flashcards" class="flex flex-col items-center gap-1 text-slate-400 font-extrabold text-[11px] p-1">
+        <span class="text-xl">🃏</span> Fichas
+      </button>
+      <button onclick="app.setTab('exam')" id="nav-exam" class="flex flex-col items-center gap-1 text-slate-400 font-extrabold text-[11px] p-1">
+        <span class="text-xl">📜</span> Examen PNA
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    // --- EFECTOS SONOROS MEDIANTE WEB AUDIO API ---
+    const Sound = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+      },
+      playSuccess() {
+        this.init();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const now = this.ctx.currentTime;
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc1.frequency.setValueAtTime(523.25, now);
+        osc1.frequency.setValueAtTime(659.25, now + 0.09);
+        osc2.frequency.setValueAtTime(783.99, now + 0.18);
+
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc1.start(now);
+        osc2.start(now + 0.18);
+        osc1.stop(now + 0.45);
+        osc2.stop(now + 0.45);
+      },
+      playError() {
+        this.init();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.35);
+      }
+    };
+
+    // --- BANCO COMPLETO: MANUAL YCN (OSCAR A. ISA) + PNA 2026 ---
+    // --- TEMARIO Y BANCO: 4 UNIDADES DIVIDIDAS EN 3 SUBUNIDADES (12 EN TOTAL) ---
+    const UNITS = [
+      {
+        id: 'u1',
+        title: 'Unidad 1: Aerodinámica, Carta y Mareas',
+        icon: '🌊',
+        color: 'bg-emerald-500',
+        subunits: [
+          { id: 'u1_1', code: '1.1', title: 'Teoría de la Vela y Aerodinámica', desc: 'Flujo laminar, succión en sotavento y viento aparente.' },
+          { id: 'u1_2', code: '1.2', title: 'Cartografía y Lectura de Cartas', desc: 'Escala de latitudes, Cero de Cartas y naturaleza del fondo.' },
+          { id: 'u1_3', code: '1.3', title: 'Mareas y Declinación Magnética', desc: 'Regla de duodécimos, variación anual y rumbos magnéticos.' }
+        ]
+      },
+      {
+        id: 'u2',
+        title: 'Unidad 2: Maniobras, Fondeo y Amarras',
+        icon: '🚢',
+        color: 'bg-sky-500',
+        subunits: [
+          { id: 'u2_1', code: '2.1', title: 'Maniobras a Motor y Seguridad', desc: 'Curva de Boutakov, caída a la banda y desatraque con spring.' },
+          { id: 'u2_2', code: '2.2', title: 'Fondeo y Tipos de Anclas', desc: 'Anclas engalgadas, cabo llamador y filado según sonda.' },
+          { id: 'u2_3', code: '2.3', title: 'Cabuyería, Nudos y Amarras', desc: 'Trabajo en cornamusa, As de Guía y nudo Ballestrinque.' }
+        ]
+      },
+      {
+        id: 'u3',
+        title: 'Unidad 3: Motores Marinos y Cuidado',
+        icon: '⚙️',
+        color: 'bg-indigo-500',
+        subunits: [
+          { id: 'u3_1', code: '3.1', title: 'Fundamentos de Motores Marinos', desc: 'Ciclos Diesel vs Nafta, relación de compresión y sentinas.' },
+          { id: 'u3_2', code: '3.2', title: 'Sistema de Combustible y Purga', desc: 'Filtro decantador con vaso de vidrio, purga y condensación.' },
+          { id: 'u3_3', code: '3.3', title: 'Refrigeración, Bomba y Apagado', desc: 'Inspección del escape, impulsor flexible y apagado seguro.' }
+        ]
+      },
+      {
+        id: 'u4',
+        title: 'Unidad 4: Meteorología, RIPA y Luces',
+        icon: '🧭',
+        color: 'bg-amber-500',
+        subunits: [
+          { id: 'u4_1', code: '4.1', title: 'Meteorología Náutica y El Pampero', desc: 'Frentes fríos del SW, barómetro aneroide y Buys-Ballot.' },
+          { id: 'u4_2', code: '4.2', title: 'Luces y Señales RIPA', desc: 'Luz de tope 225°, remolques mayores a 200m y buque sin gobierno.' },
+          { id: 'u4_3', code: '4.3', title: 'Reglas de Paso y Balizamiento', desc: 'Prioridades vela vs vela, alcance y boyas IALA B lateral SIR.' }
+        ]
+      }
+    ];
+
+    const QUESTION_BANK = {
+      u1_1: [
+        {
+          q: "¿Qué es el 'Viento Aparente' que experimentan las velas mientras el barco está navegando?",
+          options: [
+            "Es la suma vectorial del viento real más el viento que genera el propio avance del barco.",
+            "Es el viento medido en la costa cuando el barco se encuentra amarrado al muelle.",
+            "Es una ráfaga repentina producida por cambios de temperatura entre el agua y la tierra.",
+            "Es la corriente de agua que frena el avance del quillote."
+          ],
+          correct: 0,
+          exp: "El viento aparente es la resultante del viento real y el generado por la velocidad del barco. Es el viento sobre el cual debemos trimar (ajustar) las velas."
+        },
+        {
+          q: "Al navegar en ceñida (cerrado hacia el viento), ¿de qué lado de la vela se genera la mayor fuerza de empuje?",
+          options: [
+            "En la cara de barlovento, por el empuje directo del aire que choca en la tela.",
+            "En la cara de sotavento, por la succión (depresión) que crea el aire al acelerar.",
+            "Únicamente en el puño de driza en el tope del mástil.",
+            "En la botavara debido al peso que ejerce hacia abajo."
+          ],
+          correct: 1,
+          exp: "Al igual que el ala de un avión, el aire acelera por la cara convexa (sotavento) creando succión o depresión, que aporta la mayor fuerza de avance."
+        },
+        {
+          q: "Cuando el timonel da la orden de 'ORZAR', ¿hacia dónde debe mover la proa del velero?",
+          options: [
+            "Hacia la dirección de donde viene el viento (cerrar el rumbo al viento).",
+            "Alejándola de la dirección del viento (abrir el rumbo).",
+            "Hacia la popa dando marcha atrás con el motor auxiliar.",
+            "Hacia el muelle más cercano para fondear de emergencia."
+          ],
+          correct: 0,
+          exp: "Orzar significa llevar la proa más cerca del viento. Lo contrario es 'arribar', que significa alejar la proa del viento."
+        }
+      ],
+      u1_2: [
+        {
+          q: "¿En qué sector de una carta náutica Mercator se deben medir SIEMPRE las distancias?",
+          options: [
+            "En la escala horizontal de longitudes (márgenes superior e inferior).",
+            "En la escala lateral de latitudes, donde 1 minuto (1') equivale a 1 milla náutica.",
+            "En la rosa de los vientos del centro de la carta con una regla común.",
+            "En cualquier sector de la carta multiplicando los milímetros por diez."
+          ],
+          correct: 1,
+          exp: "¡Regla sagrada de navegación! Las distancias se miden siempre en la escala lateral de latitudes. 1 minuto de latitud = 1 milla náutica = 1.852 metros."
+        },
+        {
+          q: "¿Qué representa la cota de 'Cero de Cartas' respecto a las profundidades impresas en la carta?",
+          options: [
+            "El nivel de la marea astronómica más baja, garantizando que casi siempre habrá igual o más agua.",
+            "La profundidad promedio alcanzada durante las pleamares del mediodía.",
+            "La profundidad máxima producida en días de temporal con sudestada.",
+            "La línea de flotación promedio de aguas calmas sin contar el oleaje."
+          ],
+          correct: 0,
+          exp: "El Cero de Cartas corresponde a las bajamares más bajas astronómicas. La profundidad real es la sonda de la carta más la altura de marea del momento."
+        },
+        {
+          q: "En una carta náutica observas las letras 'A', 'F' y 'P' sobre el fondo. ¿Cuáles son los mejores tenederos para fondear?",
+          options: [
+            "P (Piedra), porque las uñas del ancla se traban con gran firmeza.",
+            "F (Fango) y A (Arena), porque ofrecen excelente agarre para que el ancla muerda.",
+            "L (Limo) es el único fondo autorizado por las autoridades náuticas.",
+            "Ninguno de los tres; únicamente se puede fondear sobre lechos de cemento o tosca."
+          ],
+          correct: 1,
+          exp: "A = Arena y F = Fango son muy buenos tenederos donde el ancla clava con facilidad. P = Piedra es riesgoso porque el ancla puede garrear o trabarse sin poder recuperarla."
+        }
+      ],
+      u1_3: [
+        {
+          q: "¿Para qué sirve en la práctica la 'Regla de los Duodécimos' en zonas de marea?",
+          options: [
+            "Para estimar cuánto sube o baja el agua en cada una de las 6 horas entre bajamar y pleamar.",
+            "Para calcular cuántas millas náuticas recorre el barco en doce horas de navegación.",
+            "Para conocer el consumo horario de combustible del motor auxiliar.",
+            "Para determinar el ángulo de escora del velero con viento de través."
+          ],
+          correct: 0,
+          exp: "La amplitud de marea se reparte en doceavos en 6 horas: 1/12 en la 1ª hora, 2/12 en la 2ª, 3/12 en la 3ª, 3/12 en la 4ª, 2/12 en la 5ª y 1/12 en la 6ª."
+        },
+        {
+          q: "¿En qué fases lunares se producen las 'Mareas Vivas' o de Sicigia (máximas pleamares y bajamares)?",
+          options: [
+            "En Luna Llena y Luna Nueva, cuando el Sol y la Luna alinean sus fuerzas de atracción.",
+            "En Cuarto Creciente y Cuarto Menguante, cuando las fuerzas se contrarrestan.",
+            "Únicamente durante los solsticios de verano en días de calma.",
+            "Cuando la luna no es visible durante noches de niebla."
+          ],
+          correct: 0,
+          exp: "En Luna Nueva y Llena (Sicigias), Sol, Luna y Tierra están alineados, sumando fuerzas de marea y produciendo las máximas subidas y bajadas."
+        },
+        {
+          q: "El compás (brújula) señala hacia el Norte Magnético, que no coincide con el Norte Geográfico de la carta. ¿Cómo se llama esa diferencia?",
+          options: [
+            "Desvío de rueda del timón.",
+            "Declinación Magnética (dm).",
+            "Abatimiento lateral del casco.",
+            "Deriva de corriente de superficie."
+          ],
+          correct: 1,
+          exp: "La Declinación Magnética (dm) es el ángulo entre el Norte Verdadero y el Norte Magnético. Se lee en la rosa de la carta náutica junto con su variación anual."
+        }
+      ],
+      u2_1: [
+        {
+          q: "¡Hombre al agua por la banda de estribor! ¿Cuál es la primera maniobra de timón que debe hacerse al instante?",
+          options: [
+            "Meter timón a estribor (hacia la misma banda de caída) para alejar la popa y la hélice de la persona.",
+            "Meter timón a babor (banda contraria) para desviar la proa lo antes posible.",
+            "Poner timón al centro y acelerar a fondo para no perder velocidad de gobierno.",
+            "Dar marcha atrás de golpe con el timón centrado a la vía."
+          ],
+          correct: 0,
+          exp: "¡Primer paso vital! Meter timón a la banda de caída para alejar la hélice del náufrago, gritar '¡Hombre al agua!' y arrojar de inmediato el salvavidas circular."
+        },
+        {
+          q: "¿Cuál es el propósito de la maniobra de rescate conocida como 'Curva de Boutakov'?",
+          options: [
+            "Retornar con precisión hacia la persona caída navegando en sentido inverso sobre la misma estela anterior.",
+            "Frenar el barco en seco fondeando un ancla de mar por la proa.",
+            "Realizar giros de 360° continuos hasta que el barco se detenga por fricción.",
+            "Detener el motor y aguardar a que la corriente acerque al náufrago."
+          ],
+          correct: 0,
+          exp: "Maniobra de Boutakov: caer 70° a la banda del náufrago, estabilizar y contravirar 180° para volver exactamente por la derrota y estela previa."
+        },
+        {
+          q: "Para desatracar a motor de un muelle estrecho utilizando un 'Spring de proa', ¿cómo se maniobra?",
+          options: [
+            "Firme el spring de proa, timón hacia el muelle y avante despacio: la popa se abre al canal y se sale marcha atrás.",
+            "Se sueltan todas las amarras y se da marcha atrás a fondo con timón centrado.",
+            "Se acelera hacia adelante con timón al canal sin defensas en la roda.",
+            "Se vira el barco a mano con el bichero sin encender el motor."
+          ],
+          correct: 0,
+          exp: "Con el spring de proa y timón hacia el muelle, al dar avante la proa apoya en la defensa y la popa se separa ampliamente del muelle hacia el canal libre."
+        }
+      ],
+      u2_2: [
+        {
+          q: "En condiciones normales con fondeo mixto (cadena y cabo), ¿cuánto fondeo se debe soltar (filar)?",
+          options: [
+            "Entre 3 y 5 veces la profundidad del lugar (y de 7 a 10 veces en caso de mal tiempo).",
+            "Exactamente la misma medida que la profundidad (1 vez la sonda).",
+            "Una longitud fija de 15 metros sin importar la profundidad ni el viento.",
+            "El doble de la manga del barco medida de babor a estribor."
+          ],
+          correct: 0,
+          exp: "Filar de 3 a 5 veces la sonda permite que el tiro del ancla sea horizontal sobre el fondo para que las uñas claven bien. Con poco cabo el ancla tira hacia arriba y garrea."
+        },
+        {
+          q: "¿Por qué está TERMINANTEMENTE PROHIBIDO usar cabos de polipropileno para fondear?",
+          options: [
+            "Porque es un material flotante que permanece en superficie y se enreda en la hélice o el timón.",
+            "Porque es demasiado pesado y hunde la proa de la embarcación.",
+            "Porque se disuelve rápidamente al entrar en contacto con el agua dulce.",
+            "Porque no resiste la humedad ambiental de la noche."
+          ],
+          correct: 0,
+          exp: "El polipropileno flota en el agua; por eso queda flotando en superficie con enorme peligro de engancharse en la hélice o timón. Se debe usar nylon (elástico) o dacron."
+        },
+        {
+          q: "¿Qué significa que el ancla está 'garreando'?",
+          options: [
+            "Que no logra morder ni afirmarse en el fondo y se arrastra, dejando al barco a la deriva.",
+            "Que quedó fuertemente trabada entre piedras en el lecho del río.",
+            "Que la cadena se enrolló alrededor del mástil principal.",
+            "Que el ancla llegó al fondo a más de 30 metros de profundidad."
+          ],
+          correct: 0,
+          exp: "Garrear ocurre cuando el ancla araña o resbala sobre el fondo sin afirmarse, perdiendo el fondeo y derivando por acción del viento o la corriente."
+        }
+      ],
+      u2_3: [
+        {
+          q: "¿Por qué el 'As de Guía' es considerado el nudo rey de la navegación?",
+          options: [
+            "Porque forma una gaza (lazo) fija que no se corre ni se azoca (aprieta) bajo tensión, y se desata con facilidad.",
+            "Porque es el único nudo que se suelta solo al mojarse con agua de río.",
+            "Porque sirve exclusivamente para unir cabos de diferente grosor.",
+            "Porque se aprieta permanentemente y jamás vuelve a desatarse."
+          ],
+          correct: 0,
+          exp: "El As de Guía es el nudo marinero por excelencia: no resbala bajo cargas pesadas, no se traba y se desata fácilmente después de soportar gran tensión."
+        },
+        {
+          q: "¿Para qué se utiliza el nudo 'Ballestrinque' y qué precaución esencial exige?",
+          options: [
+            "Para colgar defensas a los candeleros; debe asegurarse con un medio cote porque puede aflojarse si la tensión fluctúa.",
+            "Para unir dos cabos de fondeo cortados en emergencia.",
+            "Para afirmar el ancla al molinete sin necesidad de cadena.",
+            "Para izar al tripulante al tope del mástil con el arnés."
+          ],
+          correct: 0,
+          exp: "El Ballestrinque es ideal para colgar defensas, pero con tirones variables puede soltarse; por eso siempre se le añade un medio cote de remate."
+        },
+        {
+          q: "¿Cuál es la regla de oro de seguridad al afirmar un cabo bajo tensión en una cornamusa?",
+          options: [
+            "El cabo que hace fuerza (tensión) debe entrar por la base de la cornamusa; los ochos y la trinca van arriba.",
+            "La trinca debe ir colocada abajo apretada contra la madera de cubierta.",
+            "Se deben realizar diez vueltas redondas consecutivas sin hacer ochos.",
+            "El cabo debe cortarse al ras para que no estorbe el paso en cubierta."
+          ],
+          correct: 0,
+          exp: "¡Cabo de fuerza siempre abajo! Si colocas la trinca por debajo del cabo que tira con fuerza, quedará mordida y no podrás soltar el amarre sin cortar el cabo."
+        }
+      ],
+      u3_1: [
+        {
+          q: "¿Cuál es la diferencia fundamental en el encendido entre un motor Diésel y uno de Nafta?",
+          options: [
+            "El Diésel comprime solo aire y enciende por calor al inyectar gasoil (sin bujías); el de nafta necesita la chispa de una bujía.",
+            "El Diésel utiliza cuatro bujías de alto voltaje y el de nafta ninguna.",
+            "El motor de nafta carece de pistones y bielas en su interior.",
+            "El Diésel no necesita combustible para mantenerse encendido."
+          ],
+          correct: 0,
+          exp: "En el motor Diésel, el aire se comprime a gran presión alcanzando más de 700°C; al inyectar gasoil pulverizado se autoinflama sin necesidad de bujías."
+        },
+        {
+          q: "¿Por qué el combustible Diésel (gasoil) es mucho más seguro a bordo que la nafta?",
+          options: [
+            "Porque el gasoil no emite vapores explosivos a temperatura ambiente que se acumulen peligrosamente en la sentina.",
+            "Porque el gasoil se evapora en menos de tres segundos al contacto con el aire.",
+            "Porque el gasoil apaga automáticamente cualquier llama de fuego.",
+            "Porque el gasoil no ensucia los filtros de combustible."
+          ],
+          correct: 0,
+          exp: "Los vapores de nafta son más pesados que el aire y caen a la sentina, donde cualquier chispa puede provocar una explosión. El gasoil tiene un punto de inflamación muy superior (>55°C)."
+        },
+        {
+          q: "En un motor marino Diésel de 4 tiempos, ¿qué ingresa al cilindro durante la carrera de admisión?",
+          options: [
+            "Únicamente aire atmosférico limpio y filtrado.",
+            "Una mezcla de gasoil pulverizado y nafta de dos tiempos.",
+            "Gasoil puro inyectado a máxima presión.",
+            "Gases quemados del escape con vapor de agua."
+          ],
+          correct: 0,
+          exp: "En el tiempo de admisión del Diésel, el pistón desciende aspirando únicamente aire puro. El combustible se inyecta recién al finalizar la compresión."
+        }
+      ],
+      u3_2: [
+        {
+          q: "¿Qué función cumple el filtro decantador con vaso de vidrio en la línea de combustible diésel?",
+          options: [
+            "Separar el agua presente en el gasoil para evitar que pase a la bomba inyectora y arruine los inyectores.",
+            "Aumentar la potencia del motor mejorando el octanaje del gasoil.",
+            "Filtrar las partículas de aceite que salen del cárter del motor.",
+            "Medir con exactitud cuántos litros de combustible quedan en el tanque."
+          ],
+          correct: 0,
+          exp: "El agua es más pesada que el gasoil y se deposita en el fondo del vaso de vidrio. Si el agua llega a los inyectores, los arruina por corrosión inmediata."
+        },
+        {
+          q: "Si entra aire en las cañerías de combustible de un motor diésel, ¿qué sucede y cómo se resuelve?",
+          options: [
+            "El motor se para y no arranca; hay que 'purgar' el circuito aflojando los purgadores y bombeando a mano.",
+            "El motor se acelera al máximo y se detiene cortando el cable de la batería.",
+            "El motor funciona con normalidad pero consume más aceite de caja.",
+            "Se resuelve simplemente acelerando a fondo con la llave de contacto puesta."
+          ],
+          correct: 0,
+          exp: "El sistema de inyección diésel no tolera burbujas de aire. Si entra aire, el motor se detiene y es indispensable purgarlo con la bomba manual hasta que salga gasoil limpio."
+        },
+        {
+          q: "¿Por qué se recomienda dejar los tanques de combustible llenos cuando el barco queda amarrado por varias semanas?",
+          options: [
+            "Para evitar que el aire húmedo interior condense agua en las paredes del tanque por los cambios de temperatura día/noche.",
+            "Para que el barco quede más pesado y no se balancee en la amarra.",
+            "Para evitar que el gasoil pierda color por la luz solar.",
+            "Para impedir que los inyectores se queden sin corriente eléctrica."
+          ],
+          correct: 0,
+          exp: "El espacio libre de un tanque semivacío se llena de aire húmedo que se condensa en gotas de agua sobre las paredes frías. Con el tanque lleno se elimina el aire y se evita el agua en el gasoil."
+        }
+      ],
+      u3_3: [
+        {
+          q: "Inmediatamente después de arrancar el motor marino, ¿qué control visual es OBLIGATORIO en los primeros segundos?",
+          options: [
+            "Verificar que salga agua de refrigeración mezclada con los gases por el caño de escape exterior.",
+            "Comprobar que el tacómetro marque más de 4.000 revoluciones por minuto.",
+            "Revisar que la luz de tope esté encendida a plena potencia.",
+            "Verificar que la caña del timón esté atada a la banda de estribor."
+          ],
+          correct: 0,
+          exp: "Si en 10 a 15 segundos no sale agua de refrigeración por el escape exterior, el motor no está chupando agua (o la toma de fondo está cerrada) y recalentará rápidamente."
+        },
+        {
+          q: "¿Qué cuidado crítico exige el rodete flexible de goma (impeller) de la bomba de agua de mar?",
+          options: [
+            "Jamás debe girar en seco sin agua, ya que la fricción destruye las paletas de goma en pocos segundos.",
+            "Debe lubricarse con nafta todos los meses para ablandar el caucho.",
+            "Debe cambiarse únicamente cada diez años de uso continuo.",
+            "Se debe pintar de color negro para protegerlo del salitre."
+          ],
+          correct: 0,
+          exp: "El impeller de goma se lubrica y enfría con la propia agua bombeada. Si gira en seco (por ejemplo arrancar fuera del agua sin manguera), se quema y desintegra de inmediato."
+        },
+        {
+          q: "¿Cuál es el procedimiento correcto para apagar el motor luego de una navegación exigida a régimen?",
+          options: [
+            "Dejarlo moderar en neutro de 3 a 5 minutos para estabilizar temperaturas y recién entonces apagarlo.",
+            "Acelerar a fondo en neutro y cortar el contacto de inmediato.",
+            "Cerrar la toma de fondo de agua antes de detener el motor.",
+            "Poner marcha atrás brusca para que el volante del motor se frene por inercia."
+          ],
+          correct: 0,
+          exp: "Al dejarlo regular unos minutos en ralentí, la bomba sigue refrigerando y la temperatura baja suavemente. Si se corta de golpe caliente, el calor residual deforma piezas del motor."
+        }
+      ],
+      u4_1: [
+        {
+          q: "Ante la inminencia de un frente frío de 'Pampero' (viento fuerte del Sudoeste), ¿cuál es la regla de oro?",
+          options: [
+            "Achicar paño con anticipación (poner tormentín/foque chico y tomar rizos en la mayor) ANTES de que peguen las primeras rachas.",
+            "Izar las velas más grandes para escapar a gran velocidad de la tormenta.",
+            "Fondear de inmediato por la popa con todas las velas cazadas al centro.",
+            "Soltar el timón y refugiarse en la cabina dejando el velero a la deriva."
+          ],
+          correct: 0,
+          exp: "El Pampero entra con rachas muy repentinas y violentas del SW. Cambiar velas o tomar rizos con el viento encima es peligroso; la maniobra debe hacerse con anticipación."
+        },
+        {
+          q: "¿Qué comportamiento de la aguja del barómetro aneroide anuncia la llegada de mal tiempo o temporal?",
+          options: [
+            "Una caída rápida y pronunciada de la presión atmosférica (más de 1 a 2 hPa por hora).",
+            "Una presión que se mantiene completamente fija en 1.013 hPa sin oscilar.",
+            "Una subida lenta y sostenida de la presión durante un día despejado.",
+            "Una oscilación suave que coincida con el movimiento de las olas."
+          ],
+          correct: 0,
+          exp: "Una caída brusca y sostenida en la presión barométrica es el aviso meteorológico más claro de que un centro de baja presión o tormenta severa se aproxima."
+        },
+        {
+          q: "¿Qué condiciones meteorológicas y de marea produce típicamente una 'Sudestada' en el Río de la Plata?",
+          options: [
+            "Vientos sostenidos del Sudeste, cielo cubierto con lloviznas y una gran crecida en las aguas del río.",
+            "Vientos calurosos del Noroeste con bajante extrema de la marea.",
+            "Cielo totalmente despejado y ausencia de olas durante semanas.",
+            "Ráfagas cortas de 5 minutos seguidas de sol radiante."
+          ],
+          correct: 0,
+          exp: "La Sudestada sopla del SE en contra de la salida de las aguas del estuario, represando el río y generando crecidas notables ('marea meteorológica') e inundaciones costeras."
+        }
+      ],
+      u4_2: [
+        {
+          q: "Navegando de noche, ¿cuáles son los colores y sectores de las luces de costado según el RIPA?",
+          options: [
+            "Estribor = Verde (derecha) y Babor = Rojo (izquierda), cubriendo 112,5° cada una desde la proa.",
+            "Estribor = Rojo y Babor = Verde, cubriendo 180° cada una.",
+            "Ambas luces son blancas destellantes instaladas en la popa.",
+            "Amarilla a estribor y Azul a babor visibles en 360 grados todo horizonte."
+          ],
+          correct: 0,
+          exp: "¡Regla básica! Estribor = Verde; Babor = Rojo. Cada luz cubre desde la proa hasta 22,5° a popa del través de su banda correspondiente (112,5°)."
+        },
+        {
+          q: "¿Qué sectores del horizonte cubren la Luz de Tope y la Luz de Alcance en un buque a motor?",
+          options: [
+            "Luz de tope: blanca hacia proa de 225°. Luz de alcance: blanca en popa de 135°.",
+            "Luz de tope: roja de 360°. Luz de alcance: verde de 180°.",
+            "Ambas cubren 90 grados apuntando directamente hacia el fondo del río.",
+            "Luz de tope es amarilla y luz de alcance es roja destellante."
+          ],
+          correct: 0,
+          exp: "La luz de tope blanca (225° proel) sumada a la luz de alcance blanca (135° popel) completan los 360° del horizonte alrededor del barco."
+        },
+        {
+          q: "¿Qué señales reglamentarias debe exhibir un buque que ha quedado 'Sin Gobierno' (averiado e incapaz de maniobrar)?",
+          options: [
+            "De noche: dos luces rojas verticales todo horizonte. De día: dos bolas negras en línea vertical.",
+            "De noche: tres luces verdes en triángulo. De día: un cono negro hacia arriba.",
+            "De noche: una luz blanca destellante continua. De día: una bandera roja en el estay.",
+            "De noche: luces de costado parpadeando. De día: tres banderas cuadradas azules."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 27: Buque sin gobierno = de noche 2 luces rojas verticales ('rojo sobre rojo = capitán en remojo / sin gobierno'); de día, dos bolas negras en vertical."
+        }
+      ],
+      u4_3: [
+        {
+          q: "Dos veleros navegan a vela con riesgo de abordaje y reciben el viento por bandas diferentes. ¿Quién tiene derecho de paso?",
+          options: [
+            "El velero amurado a Estribor mantiene su rumbo; el amurado a Babor debe apartarse y maniobrar.",
+            "El velero amurado a Babor tiene preferencia y el de Estribor debe virar.",
+            "El velero de mayor tamaño siempre tiene derecho de paso sobre el más pequeño.",
+            "Ambos veleros deben virar en redondo al mismo tiempo."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 12: 'Babor cede a Estribor'. El velero que recibe el viento por babor debe mantenerse apartado del derrotante que navega amurado a estribor."
+        },
+        {
+          q: "Dos veleros reciben el viento por la MISMA banda navegando con riesgo de colisión. ¿Quién tiene la obligación de maniobrar?",
+          options: [
+            "El velero que está a Barlovento (más al viento) debe apartarse del que está a Sotavento.",
+            "El velero que está a Sotavento debe apartarse del que está a Barlovento.",
+            "El velero que navegue a mayor velocidad debe ceder el paso.",
+            "El velero que tenga velas de proa más grandes tiene la prioridad."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 12: Con viento por la misma banda, 'Barlovento cede a Sotavento', ya que el barco situado a barlovento tiene mejor capacidad de maniobra."
+        },
+        {
+          q: "En el Sistema de Balizamiento IALA B (Argentina y América), al ENTRAR a puerto desde el mar, ¿cómo se identifican las boyas?",
+          options: [
+            "A babor boya Verde (marca cilíndrica); a estribor boya Roja (marca cónica). Regla SIR: Saliendo, Izquierda Roja.",
+            "A babor boya Roja y a estribor boya Verde (como en Europa / Sistema IALA A).",
+            "Todas las boyas laterales son amarillas con destellos blancos continuos.",
+            "A estribor boya a franjas verticales blancas y negras y a babor boya azul reflectiva."
+          ],
+          correct: 0,
+          exp: "En IALA B usamos la regla mnemotécnica SIR: 'Saliendo, Izquierda Roja'. Por lo tanto, al ENTRAR a puerto: Estribor = Roja (cono) y Babor = Verde (cilindro)."
+        }
+      ]
+    };
+
+    // --- BASES DE DATOS TÁCTILES: 4 DIAGRAMAS OFICIALES YCN (FIG. 1, FIG. 7, FIG. 8 Y FIG. 16) ---
+    const RECOGNITION_FIGURES = [
+      {
+        id: "fig1",
+        num: "FIG. 1",
+        title: "Casco y Cubierta",
+        subtitle: "13 Partes Fundamentales del Velero",
+        icon: "⛵",
+        image: "assets/fig1_casco.png",
+        w: 680,
+        h: 429,
+        parts: [
+          { id: "b-pulpito", name: "PÚLPITO DE PROA", lx: 55, ly: 14, lw: 90, lh: 42, tx: 120, ty: 95, desc: "Barandilla metálica tubular en proa que protege a la tripulación contra caídas al agua durante maniobras." },
+          { id: "b-tambucho", name: "TAMBUCHO", lx: 202, ly: 18, lw: 86, lh: 22, tx: 280, ty: 155, desc: "Abertura con tapa hermética sobre la cubierta proel para ventilación, luz o acceso al pañol de velas." },
+          { id: "b-guardamancebos", name: "GUARDAMANCEBOS", lx: 330, ly: 25, lw: 150, lh: 24, tx: 375, ty: 135, desc: "Líneas o cables de acero perimetrales pasados por los candeleros para seguridad de la tripulación." },
+          { id: "b-escotilla", name: "ESCOTILLA", lx: 408, ly: 62, lw: 86, lh: 22, tx: 365, ty: 215, desc: "Acceso principal a la cabina interior con mamparos y tapa corrediza estanca." },
+          { id: "b-cockpit", name: "COCKPIT (BAÑERA)", lx: 442, ly: 98, lw: 74, lh: 22, tx: 505, ty: 260, desc: "Espacio abierto en popa donde se ubican la caña del timón, los tripulantes y los mandos de maniobra." },
+          { id: "b-balcon", name: "BALCÓN DE POPA", lx: 552, ly: 80, lw: 90, lh: 46, tx: 590, ty: 220, desc: "Estructura tubular metálica de seguridad perimetral que cierra la popa de la embarcación." },
+          { id: "b-carlinga", name: "CARLINGA", lx: 38, ly: 196, lw: 86, lh: 20, tx: 275, ty: 184, desc: "Herraje o base reforzada en cubierta donde apoya y encaja firmemente el pie (coz) del mástil." },
+          { id: "b-candeleros", name: "CANDELEROS", lx: 78, ly: 265, lw: 118, lh: 20, tx: 295, ty: 275, desc: "Postes metálicos verticales fijados a la regala que sostienen los cables guardamancebos." },
+          { id: "b-quillote", name: "QUILLOTE", lx: 134, ly: 323, lw: 90, lh: 20, tx: 330, ty: 345, desc: "Gran apéndice de lastre bajo el casco que da par adrizante contra la escora y evita el abatimiento lateral." },
+          { id: "b-molinete", name: "MOLINETE", lx: 302, ly: 356, lw: 80, lh: 24, tx: 395, ty: 290, desc: "Winche desmultiplicador con engranajes para cazar escotas del foque/génova con mínima fuerza física." },
+          { id: "b-cana", name: "CAÑA", lx: 432, ly: 335, lw: 48, lh: 24, tx: 500, ty: 290, desc: "Palanca de gobierno que el timonel mueve manualmente para orientar la pala del timón." },
+          { id: "b-timon", name: "PALA DEL TIMÓN", lx: 412, ly: 390, lw: 120, lh: 30, tx: 565, ty: 390, desc: "Plano sumergido móvil que orienta el flujo hidrodinámico para gobernar el rumbo de la nave." },
+          { id: "b-espejo", name: "ESPEJO", lx: 574, ly: 375, lw: 66, lh: 26, tx: 605, ty: 330, desc: "Plano vertical o inclinado transversal que cierra la popa del casco." }
+        ]
+      },
+      {
+        id: "fig7",
+        num: "FIG. 7",
+        title: "Aparejo y Jarcia",
+        subtitle: "10 Elementos de la Arboladura y Jarcia Firme",
+        icon: "🗼",
+        image: "assets/fig7_aparejo.png",
+        w: 679,
+        h: 1024,
+        parts: [
+          { id: "j-palo", name: "PALO MAYOR", lx: 85, ly: 142, lw: 102, lh: 20, tx: 286, ty: 220, desc: "Mástil vertical principal que soporta el velamen y sobre el cual arraiga la jarcia firme." },
+          { id: "j-cruceta", name: "CRUCETA", lx: 114, ly: 215, lw: 78, lh: 20, tx: 286, ty: 274, desc: "Percha transversal horizontal que abre el ángulo de los obenques altos aumentando su apoyo lateral al palo." },
+          { id: "j-estay-proel", name: "ESTAY PROEL", lx: 40, ly: 297, lw: 100, lh: 18, tx: 200, ty: 420, desc: "Cable longitudinal de acero que va desde el tope/arraigo del palo hasta la proa, impidiendo que caiga hacia popa." },
+          { id: "j-obenques-bajos", name: "OBENQUES BAJOS", lx: 34, ly: 440, lw: 140, lh: 18, tx: 265, ty: 510, desc: "Cables que van desde la altura de las crucetas hasta la cubierta, impidiendo que el centro del palo pandee." },
+          { id: "j-pinzote", name: "PINZOTE", lx: 46, ly: 635, lw: 72, lh: 20, tx: 286, ty: 715, desc: "Herraje de articulación universal que une la botavara con el mástil permitiendo su movimiento lateral y vertical." },
+          { id: "j-obenques-altos", name: "OBENQUES ALTOS", lx: 348, ly: 158, lw: 138, lh: 20, tx: 335, ty: 480, desc: "Cables laterales que van desde el tope del palo pasando por el extremo de las crucetas hasta la cubierta." },
+          { id: "j-amantillo", name: "AMANTILLO", lx: 405, ly: 271, lw: 90, lh: 18, tx: 415, ty: 480, desc: "Cabo que sostiene el penol de la botavara cuando la vela mayor está arriada o al tomar rizos." },
+          { id: "j-estay-popel", name: "ESTAY POPEL", lx: 455, ly: 370, lw: 100, lh: 18, tx: 480, ty: 520, desc: "Cable de acero firme que va desde el tope del mástil hasta la popa, contrarrestando la tensión del estay proel." },
+          { id: "j-burdas", name: "BURDAS", lx: 508, ly: 490, lw: 70, lh: 18, tx: 428, ty: 595, desc: "Cables auxiliares hacia popa que apuntalan el palo, comunes como burdas volantes en aparejos fraccionados." },
+          { id: "j-botavara", name: "BOTAVARA", lx: 554, ly: 603, lw: 84, lh: 18, tx: 450, ty: 715, desc: "Percha horizontal articulada al mástil que sostiene y orienta el pujamen de la vela mayor." }
+        ]
+      },
+      {
+        id: "fig8",
+        num: "FIG. 8",
+        title: "Botavara y Escotas",
+        subtitle: "6 Mecanismos de Maniobra de la Mayor",
+        icon: "⚙️",
+        image: "assets/fig8_botavara.png",
+        w: 680,
+        h: 671,
+        parts: [
+          { id: "bo-botavara", name: "BOTAVARA", lx: 188, ly: 165, lw: 86, lh: 26, tx: 350, ty: 362, desc: "Percha horizontal que orienta y controla el ángulo de la vela mayor respecto al viento." },
+          { id: "bo-escota", name: "ESCOTA DE MAYOR", lx: 48, ly: 385, lw: 86, lh: 42, tx: 228, ty: 480, desc: "Aparejo de cabos y motones que regula el cazado o filado de la botavara para ajustar el ángulo al viento." },
+          { id: "bo-vang", name: "VANG (CONTRAPALANQUÍN)", lx: 319, ly: 435, lw: 50, lh: 24, tx: 420, ty: 430, desc: "Aparejo diagonal o pistón que tira de la botavara hacia abajo evitando que se eleve en rumbos francos." },
+          { id: "bo-driza", name: "DRIZA DE MAYOR", lx: 514, ly: 97, lw: 94, lh: 40, tx: 475, ty: 180, desc: "Cabo para izar la vela mayor hasta el tope del mástil y templar la tensión de su grátil." },
+          { id: "bo-moton", name: "MOTÓN", lx: 508, ly: 439, lw: 74, lh: 32, tx: 460, ty: 520, desc: "Polea náutica fija o móvil para redirigir cabos y multiplicar la fuerza aplicada." },
+          { id: "bo-mordazas", name: "MORDAZAS", lx: 274, ly: 588, lw: 122, lh: 30, tx: 230, ty: 530, desc: "Dispositivos mecánicos con levas dentadas para trabar y fijar cabos tensos de forma rápida y segura." }
+        ]
+      },
+      {
+        id: "fig16",
+        num: "FIG. 16",
+        title: "Vela Mayor",
+        subtitle: "9 Puños, Bordes y Componentes del Paño",
+        icon: "🪁",
+        image: "assets/fig16_vela.png",
+        w: 680,
+        h: 685,
+        parts: [
+          { id: "v-driza", name: "PUÑO DE DRIZA", lx: 318, ly: 40, lw: 128, lh: 30, tx: 500, ty: 95, desc: "Vértice superior de la vela afirmado a la driza para izarla al tope del mástil." },
+          { id: "v-battens", name: "BATTENS (SABLES)", lx: 251, ly: 148, lw: 86, lh: 28, tx: 380, ty: 225, desc: "Sables o varillas alargadas flexibles de fibra que mantienen la forma y sustentación aerodinámica del paño." },
+          { id: "v-baluma", name: "BALUMA", lx: 168, ly: 267, lw: 72, lh: 28, tx: 300, ty: 345, desc: "Borde posterior curvado y libre de la vela entre el puño de driza y el de escota." },
+          { id: "v-rizos", name: "FAJA O MANO DE RIZOS", lx: 88, ly: 342, lw: 104, lh: 30, tx: 375, ty: 440, desc: "Franja horizontal con ollaos que permite achicar la superficie de la vela ante vientos de temporal." },
+          { id: "v-escota", name: "PUÑO DE ESCOTA", lx: 41, ly: 493, lw: 130, lh: 20, tx: 225, ty: 565, desc: "Vértice inferior popel donde se conecta el pajarín o escota para tensar el pujamen." },
+          { id: "v-pujamen", name: "PUJÁMEN", lx: 270, ly: 620, lw: 80, lh: 35, tx: 350, ty: 590, desc: "Borde inferior horizontal de la vela que corre a lo largo de la botavara." },
+          { id: "v-amura", name: "PUÑO DE AMURA", lx: 450, ly: 620, lw: 130, lh: 35, tx: 500, ty: 565, desc: "Vértice inferior proel afirmado junto al pinzote en la unión del mástil con la botavara." },
+          { id: "v-ollaos", name: "OLLAOS", lx: 556, ly: 482, lw: 66, lh: 28, tx: 510, ty: 570, desc: "Ojales circulares reforzados con aros metálicos para pasar cabos, amuras o grilletes." },
+          { id: "v-gratil", name: "GRATIL", lx: 567, ly: 315, lw: 62, lh: 26, tx: 525, ty: 360, desc: "Borde vertical delantero de la vela que va envergado a lo largo del mástil." }
+        ]
+      }
+    ];
+
+    // --- FICHAS MNEMOTÉCNICAS EXPANDIDAS (12 SUBUNIDADES) ---
+    const FLASHCARDS = [
+      { f: "Viento Aparente", b: "Suma vectorial del viento real y el viento producido por la velocidad del barco.\nEs el viento sobre el cual se orientan y ajustan las velas." },
+      { f: "Escala de Latitudes", b: "En la carta náutica Mercator, las distancias se miden SIEMPRE en la escala lateral de LATITUDES.\n1 minuto de latitud (1') = 1 milla náutica = 1.852 m = 10 cables." },
+      { f: "Regla de los Duodécimos", b: "Mareas: Repartición horaria de la amplitud en 6 horas:\n1/12, 2/12, 3/12, 3/12, 2/12 y 1/12.\nPermite estimar la altura de agua en momentos intermedios." },
+      { f: "Hombre al Agua (MOB)", b: "1°: Meter timón a la banda de caída (aleja la popa y la hélice del náufrago).\n2°: Gritar '¡Hombre al agua!' y arrojar salvavidas circular.\n3°: Maniobra de Boutakov (volver por la estela)." },
+      { f: "Línea de Fondeo", b: "Filar normalmente de 3 a 5 veces la profundidad (sonda).\nEn mal tiempo: filar de 7 a 10 veces la sonda.\n¡Prohibido polipropileno (flota y se enreda en la hélice)!" },
+      { f: "As de Guía y Cornamusa", b: "As de Guía: Gaza fija que no se corre ni se azoca bajo tensión, y se desata con facilidad.\nCornamusa: Cabo de fuerza SIEMPRE ABAJO; trinca ARRIBA." },
+      { f: "Motor Diésel vs Nafta", b: "Diésel: Comprime aire puro (>700°C) y enciende por calor al inyectar gasoil (sin bujías). Muy seguro: no genera vapores explosivos en sentina.\nNafta: Enciende por chispa de bujía." },
+      { f: "Purga y Filtro Decantador", b: "Filtro decantador: Separa el agua del gasoil en el vaso de vidrio.\nPurga: Si entra aire al diésel, el motor se detiene y no arranca hasta purgarlo a mano." },
+      { f: "Refrigeración y Apagado", b: "Al arrancar: Verificar salida de agua por el escape en 10-15 segundos.\nImpeller de goma: ¡Jamás girar en seco!\nApagado: Regular 3 a 5 min en neutro antes de apagar." },
+      { f: "El Pampero y Barómetro", b: "Pampero: Frente frío violento del SW. Regla de oro: achicar paño con tiempo ANTES del impacto.\nBarómetro: Caída rápida (> 1-2 hPa/h) anuncia tormenta severa." },
+      { f: "Luces de Navegación RIPA", b: "Tope: Blanca proel 225°.\nCostados: Verde (estribor) y Roja (babor) 112,5° c/u.\nAlcance: Blanca popel 135°.\nSin gobierno: 2 luces ROJAS todo horizonte en vertical." },
+      { f: "Prioridades y Boyas IALA B", b: "Vela vs Vela:\n- Amuras contrarias: Babor cede a Estribor.\n- Misma amura: Barlovento cede a Sotavento.\nBoyas IALA B: Regla SIR (Saliendo, Izquierda Roja). Entrando: Babor = Verde, Estribor = Roja." }
+    ];
+
+    // --- ESTADO Y CONTROLADOR DE LA APLICACIÓN ---
+    const app = {
+      tab: 'map',
+      streak: 5,
+      points: 650,
+      lives: 5,
+
+      completedSubunits: {},
+      currentSubunit: null,
+      quizQuestions: [],
+      qIndex: 0,
+      selectedOption: null,
+      isAnswered: false,
+
+      figureIndex: 0,
+      exploreMode: false,
+      solvedParts: {},
+      exploredPart: null,
+      tactileTarget: null,
+      tactileSuccess: null,
+      tactileClicked: null,
+
+      cardIndex: 0,
+      isFlipped: false,
+
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+
+      init() {
+        try {
+          this.completedSubunits = JSON.parse(localStorage.getItem('timonel_completed') || '{}');
+          this.solvedParts = JSON.parse(localStorage.getItem('timonel_solved_figures') || '{}');
+        } catch(e) {
+          this.completedSubunits = {};
+          this.solvedParts = {};
+        }
+        this.nextTactile();
+        this.render();
+      },
+
+      setTab(tabName) {
+        this.tab = tabName;
+        if (tabName === 'tactile' && !this.tactileTarget) this.nextTactile();
+        if (tabName === 'exam') this.startExam();
+        this.render();
+      },
+
+      updateStats() {
+        document.getElementById('statStreak').innerText = this.streak;
+        document.getElementById('statPoints').innerText = this.points;
+        document.getElementById('statLives').innerText = this.lives;
+      },
+
+      render() {
+        ['map', 'tactile', 'flashcards', 'exam'].forEach(t => {
+          const btn = document.getElementById(`nav-${t}`);
+          if (btn) {
+            if (this.tab === t) {
+              btn.className = "flex flex-col items-center gap-1 text-sky-600 font-extrabold text-[11px] p-1 scale-105 transition-transform";
+            } else {
+              btn.className = "flex flex-col items-center gap-1 text-slate-400 font-extrabold text-[11px] p-1";
+            }
+          }
+        });
+
+        const main = document.getElementById('appContainer');
+        main.innerHTML = '';
+
+        if (this.tab === 'map') this.renderMap(main);
+        else if (this.tab === 'quiz') this.renderQuiz(main);
+        else if (this.tab === 'tactile') this.renderTactile(main);
+        else if (this.tab === 'flashcards') this.renderFlashcards(main);
+        else if (this.tab === 'exam') this.renderExam(main);
+
+        this.updateStats();
+      },
+
+      renderMap(container) {
+        const completedCount = Object.keys(this.completedSubunits).length;
+        const totalSubunits = 12;
+        const progressPct = Math.round((completedCount / totalSubunits) * 100);
+
+        let html = `
+          <div class="space-y-4 pb-12">
+            <div class="bg-gradient-to-r from-sky-700 to-cyan-600 rounded-3xl p-4 text-white shadow-lg flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">Ruta Progresiva YCN • 2026</span>
+                <h2 class="text-xl font-black mt-1">Curso de Timonel</h2>
+                <p class="text-xs text-sky-100 font-semibold">${completedCount} de ${totalSubunits} Subunidades (${progressPct}%)</p>
+                <div class="w-40 bg-black/20 h-2 rounded-full mt-2 overflow-hidden border border-white/20">
+                  <div class="bg-amber-400 h-full rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                </div>
+              </div>
+              <div class="text-4xl">⛵</div>
+            </div>
+
+            <div class="space-y-4 pt-1">
+        `;
+
+        UNITS.forEach(u => {
+          const unitCompleted = u.subunits.filter(s => this.completedSubunits[s.id]).length;
+          html += `
+            <div class="bg-white border-2 border-slate-200 rounded-3xl p-4 shadow-sm space-y-3">
+              <div class="flex items-center gap-3 border-b border-slate-100 pb-2.5">
+                <div class="w-10 h-10 rounded-2xl ${u.color} text-white flex items-center justify-center text-xl font-black shadow-sm">
+                  ${u.icon}
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">${u.title.split(':')[0]}</span>
+                    <span class="text-[11px] font-black text-sky-600">${unitCompleted}/3 Subunidades</span>
+                  </div>
+                  <h3 class="font-extrabold text-xs text-slate-800 leading-tight">${u.title.split(':')[1] || u.title}</h3>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+          `;
+
+          u.subunits.forEach(sub => {
+            const isDone = !!this.completedSubunits[sub.id];
+            html += `
+              <div onclick="app.startQuiz('${sub.id}')" class="p-3 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-3 ${isDone ? 'bg-emerald-50/70 border-emerald-300 hover:border-emerald-500' : 'bg-slate-50 border-slate-200 hover:border-sky-400 hover:bg-white'}">
+                <div class="w-8 h-8 rounded-xl ${isDone ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-slate-300 text-slate-600'} flex items-center justify-center text-xs font-black shrink-0 shadow-sm">
+                  ${isDone ? '✓' : sub.code}
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-black text-xs text-slate-800">${sub.title}</h4>
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded-full ${isDone ? 'bg-emerald-100 text-emerald-700' : 'bg-sky-100 text-sky-700'}">${isDone ? 'Completada ★' : 'Iniciar →'}</span>
+                  </div>
+                  <p class="text-[10px] font-bold text-slate-400 leading-snug mt-0.5">${sub.desc}</p>
+                </div>
+              </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+        container.innerHTML = html;
+      },
+
+      startQuiz(subId) {
+        this.currentSubunit = subId;
+        const rawQuestions = QUESTION_BANK[subId] || [];
+
+        // BARAJAR PREGUNTAS Y BARAJAR ALEATORIAMENTE LAS 4 OPCIONES
+        this.quizQuestions = rawQuestions.map(q => {
+          const mapped = q.options.map((text, idx) => ({
+            text,
+            isCorrect: idx === q.correct
+          }));
+          const shuffled = [...mapped].sort(() => Math.random() - 0.5);
+          const newCorrect = shuffled.findIndex(item => item.isCorrect);
+          return {
+            q: q.q,
+            options: shuffled.map(item => item.text),
+            correct: newCorrect,
+            exp: q.exp
+          };
+        }).sort(() => Math.random() - 0.5);
+
+        this.qIndex = 0;
+        this.selectedOption = null;
+        this.isAnswered = false;
+        this.tab = 'quiz';
+        this.render();
+      },
+
+      renderQuiz(container) {
+        const q = this.quizQuestions[this.qIndex];
+        const progress = ((this.qIndex) / this.quizQuestions.length) * 100;
+
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+          let btnStyle = "bg-white border-2 border-slate-200 text-slate-700 hover:border-slate-300";
+          if (this.selectedOption === idx) {
+            btnStyle = "bg-sky-50 border-2 border-sky-500 text-sky-800 shadow-sm";
+          }
+          if (this.isAnswered) {
+            if (idx === q.correct) {
+              btnStyle = "bg-emerald-50 border-2 border-emerald-500 text-emerald-800 font-black";
+            } else if (this.selectedOption === idx) {
+              btnStyle = "bg-rose-50 border-2 border-rose-500 text-rose-800 line-through";
+            } else {
+              btnStyle = "bg-slate-50 border border-slate-200 text-slate-400 opacity-60";
+            }
+          }
+
+          optionsHtml += `
+            <button onclick="app.selectOption(${idx})" ${this.isAnswered ? 'disabled' : ''} class="w-full text-left p-3.5 rounded-2xl font-bold text-xs leading-relaxed transition-all btn-3d ${btnStyle} flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
+              <span class="flex-1">${opt}</span>
+            </button>
+          `;
+        });
+
+        let feedbackHtml = '';
+        if (this.isAnswered) {
+          const isCorrect = this.selectedOption === q.correct;
+          feedbackHtml = `
+            <div class="mt-3 p-3.5 rounded-2xl ${isCorrect ? 'bg-emerald-100 border border-emerald-300 text-emerald-900' : 'bg-rose-100 border border-rose-300 text-rose-900'}">
+              <div class="flex items-center gap-2 font-black text-xs">
+                <span>${isCorrect ? '✅ ¡Correcto!' : '❌ Incorrecto'}</span>
+              </div>
+              <p class="text-[11px] font-bold mt-1 text-slate-700 leading-snug">${q.exp}</p>
+            </div>
+          `;
+        }
+
+        container.innerHTML = `
+          <div class="flex flex-col h-full justify-between pb-8">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <button onclick="app.setTab('map')" class="text-slate-400 hover:text-slate-600 font-black text-lg">✕</button>
+                <div class="flex-1 bg-slate-200 h-3 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full transition-all duration-300" style="width: ${progress}%"></div>
+                </div>
+                <span class="text-xs font-black text-slate-400">${this.qIndex + 1}/${this.quizQuestions.length}</span>
+              </div>
+
+              <div class="bg-sky-50 border border-sky-100 rounded-3xl p-4 mb-4">
+                <span class="text-[10px] font-black uppercase text-sky-600 tracking-wider">Manual Teórico YCN</span>
+                <h3 class="text-sm font-black text-slate-800 mt-1 leading-snug">${q.q}</h3>
+              </div>
+
+              <div class="space-y-2.5">
+                ${optionsHtml}
+              </div>
+
+              ${feedbackHtml}
+            </div>
+
+            <div class="pt-4 mt-auto">
+              ${!this.isAnswered ? `
+                <button onclick="app.checkAnswer()" ${this.selectedOption === null ? 'disabled' : ''} class="w-full py-3.5 rounded-2xl font-black text-sm text-white bg-emerald-500 border-b-4 border-emerald-700 active:border-b-0 btn-3d disabled:opacity-40 disabled:pointer-events-none">
+                  COMPROBAR
+                </button>
+              ` : `
+                <button onclick="app.nextQuestion()" class="w-full py-3.5 rounded-2xl font-black text-sm text-white bg-sky-500 border-b-4 border-sky-700 active:border-b-0 btn-3d">
+                  CONTINUAR →
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      },
+
+      selectOption(idx) {
+        if (this.isAnswered) return;
+        this.selectedOption = idx;
+        this.render();
+      },
+
+      checkAnswer() {
+        if (this.selectedOption === null || this.isAnswered) return;
+        this.isAnswered = true;
+        const q = this.quizQuestions[this.qIndex];
+        if (this.selectedOption === q.correct) {
+          Sound.playSuccess();
+          this.points += 15;
+        } else {
+          Sound.playError();
+          this.lives = Math.max(0, this.lives - 1);
+        }
+        this.render();
+      },
+
+      nextQuestion() {
+        if (this.qIndex + 1 < this.quizQuestions.length) {
+          this.qIndex++;
+          this.selectedOption = null;
+          this.isAnswered = false;
+          this.render();
+        } else {
+          if (this.currentSubunit) {
+            this.completedSubunits[this.currentSubunit] = true;
+            try {
+              localStorage.setItem('timonel_completed', JSON.stringify(this.completedSubunits));
+            } catch(e) {}
+          }
+          this.tab = 'map';
+          this.render();
+        }
+      },
+
+      selectFigure(idx) {
+        if (this.figureIndex === idx) return;
+        this.figureIndex = idx;
+        this.exploredPart = null;
+        this.tactileSuccess = null;
+        this.tactileClicked = null;
+        this.nextTactile();
+        this.render();
+      },
+
+      setExploreMode(val) {
+        this.exploreMode = val;
+        this.exploredPart = null;
+        this.tactileSuccess = null;
+        this.tactileClicked = null;
+        if (!val && !this.tactileTarget) {
+          this.nextTactile();
+        }
+        this.render();
+      },
+
+      resetFigure(figId) {
+        this.solvedParts[figId] = [];
+        try {
+          localStorage.setItem('timonel_solved_figures', JSON.stringify(this.solvedParts));
+        } catch(e) {}
+        this.nextTactile();
+        this.render();
+      },
+
+      nextTactile() {
+        const fig = RECOGNITION_FIGURES[this.figureIndex];
+        if (!this.solvedParts[fig.id]) {
+          this.solvedParts[fig.id] = [];
+        }
+        const solved = this.solvedParts[fig.id];
+        const remaining = fig.parts.filter(p => !solved.includes(p.id));
+
+        if (remaining.length > 0) {
+          this.tactileTarget = remaining[Math.floor(Math.random() * remaining.length)];
+        } else {
+          this.tactileTarget = null;
+        }
+        this.tactileSuccess = null;
+        this.tactileClicked = null;
+      },
+
+      handlePartClick(partId) {
+        const fig = RECOGNITION_FIGURES[this.figureIndex];
+        const part = fig.parts.find(p => p.id === partId);
+        if (!part) return;
+
+        if (this.exploreMode) {
+          this.exploredPart = part;
+          this.render();
+          return;
+        }
+
+        // Modo Desafío
+        if (this.tactileSuccess !== null || !this.tactileTarget) return;
+
+        this.tactileClicked = part;
+        if (partId === this.tactileTarget.id) {
+          Sound.playSuccess();
+          this.tactileSuccess = true;
+          this.points += 20;
+          if (!this.solvedParts[fig.id]) {
+            this.solvedParts[fig.id] = [];
+          }
+          if (!this.solvedParts[fig.id].includes(partId)) {
+            this.solvedParts[fig.id].push(partId);
+            try {
+              localStorage.setItem('timonel_solved_figures', JSON.stringify(this.solvedParts));
+            } catch(e) {}
+          }
+        } else {
+          Sound.playError();
+          this.tactileSuccess = false;
+          this.lives = Math.max(0, this.lives - 1);
+        }
+        this.render();
+      },
+
+      renderTactile(container) {
+        const fig = RECOGNITION_FIGURES[this.figureIndex];
+        if (!this.solvedParts[fig.id]) {
+          this.solvedParts[fig.id] = [];
+        }
+        const solved = this.solvedParts[fig.id];
+        const solvedCount = solved.length;
+        const totalParts = fig.parts.length;
+        const isComplete = solvedCount >= totalParts;
+
+        // Fig Selector Tabs (4 Diagramas)
+        let figTabsHtml = '';
+        RECOGNITION_FIGURES.forEach((f, idx) => {
+          const sCount = (this.solvedParts[f.id] || []).length;
+          const isDone = sCount >= f.parts.length;
+          const isActive = this.figureIndex === idx;
+          figTabsHtml += `
+            <button onclick="app.selectFigure(${idx})" class="p-2 rounded-2xl flex flex-col items-center justify-center transition-all ${
+              isActive
+                ? 'bg-sky-600 text-white shadow-md scale-[1.02]'
+                : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-sky-300'
+            }">
+              <span class="text-base">${f.icon}</span>
+              <span class="text-[10px] font-black uppercase mt-0.5 tracking-tight">${f.num}</span>
+              <span class="text-[9px] font-extrabold ${isActive ? 'text-sky-100' : 'text-slate-400'}">${sCount}/${f.parts.length} ${isDone ? '✓' : ''}</span>
+            </button>
+          `;
+        });
+
+        // Mode Switcher (Desafío vs Explorar)
+        const modeSwitchHtml = `
+          <div class="flex bg-slate-200/80 p-1 rounded-2xl mb-3 border border-slate-300">
+            <button onclick="app.setExploreMode(false)" class="flex-1 py-1.5 rounded-xl text-xs font-black transition-all ${
+              !this.exploreMode ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-800'
+            }">
+              🎯 Desafío (${solvedCount}/${totalParts})
+            </button>
+            <button onclick="app.setExploreMode(true)" class="flex-1 py-1.5 rounded-xl text-xs font-black transition-all ${
+              this.exploreMode ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-800'
+            }">
+              🔍 Explorar y Repaso
+            </button>
+          </div>
+        `;
+
+        // Prompt header
+        let promptHtml = '';
+        if (this.exploreMode) {
+          promptHtml = `
+            <div class="bg-indigo-50 border-2 border-indigo-200 rounded-3xl p-3 text-center mb-3">
+              <div class="flex items-center justify-center gap-1.5 text-[10px] font-black uppercase text-indigo-700 tracking-wider">
+                <span>${fig.num}: ${fig.title}</span> • <span>Modo Exploración</span>
+              </div>
+              <p class="text-xs font-bold text-slate-700 mt-1 leading-snug">
+                Toca cualquier etiqueta o pin en el gráfico para ver su definición náutica oficial.
+              </p>
+            </div>
+          `;
+        } else {
+          if (isComplete) {
+            promptHtml = `
+              <div class="bg-emerald-50 border-2 border-emerald-300 rounded-3xl p-3 text-center mb-3">
+                <div class="flex items-center justify-center gap-1.5 text-xs font-black text-emerald-800">
+                  <span>🏆</span> ¡FIGURA COMPLETADA! (${totalParts}/${totalParts})
+                </div>
+                <p class="text-[11px] font-bold text-emerald-700 mt-0.5">Has identificado todas las partes de ${fig.title}.</p>
+                <div class="flex gap-2 justify-center mt-2">
+                  <button onclick="app.resetFigure('${fig.id}')" class="px-3 py-1 rounded-xl text-[10px] font-black bg-white border border-emerald-400 text-emerald-800 btn-3d">
+                    🔄 Reiniciar Desafío
+                  </button>
+                  ${this.figureIndex < RECOGNITION_FIGURES.length - 1 ? `
+                    <button onclick="app.selectFigure(${this.figureIndex + 1})" class="px-3 py-1 rounded-xl text-[10px] font-black bg-emerald-600 text-white btn-3d">
+                      Siguiente Figura →
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            `;
+          } else if (this.tactileTarget) {
+            promptHtml = `
+              <div class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-3 text-center mb-3">
+                <div class="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-wider text-amber-700">
+                  <span>Manual YCN • ${fig.num}</span>
+                  <span class="text-amber-400">|</span>
+                  <span class="bg-amber-100 px-2 py-0.5 rounded-full text-amber-800 font-extrabold">${solvedCount}/${totalParts} descubiertas</span>
+                </div>
+                <h3 class="text-xs font-extrabold text-slate-800 mt-1">
+                  Toca con el dedo: <span class="text-sky-600 font-black text-sm uppercase underline underline-offset-2">${this.tactileTarget.name}</span>
+                </h3>
+              </div>
+            `;
+          }
+        }
+
+        // SVG Overlay Generation
+        let svgElements = '';
+        fig.parts.forEach(p => {
+          const isSolved = solved.includes(p.id);
+          const isExplored = this.exploreMode && this.exploredPart && this.exploredPart.id === p.id;
+
+          // 1. Label Mask / Badge
+          if (this.exploreMode) {
+            svgElements += `
+              <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                <rect x="${p.lx - 3}" y="${p.ly - 2}" width="${p.lw + 6}" height="${p.lh + 4}" rx="6" fill="${isExplored ? '#0284c7' : '#ffffff'}" stroke="${isExplored ? '#0369a1' : '#cbd5e1'}" stroke-width="${isExplored ? 2 : 1.5}" opacity="0.95" />
+                <text x="${p.lx + p.lw/2}" y="${p.ly + p.lh/2 + 3.5}" fill="${isExplored ? '#ffffff' : '#0f172a'}" font-size="${p.lh > 24 ? 8.5 : 7.5}" font-weight="900" font-family="'Nunito', sans-serif" text-anchor="middle">${p.name}</text>
+              </g>
+            `;
+          } else {
+            if (isSolved) {
+              svgElements += `
+                <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                  <rect x="${p.lx - 3}" y="${p.ly - 2}" width="${p.lw + 6}" height="${p.lh + 4}" rx="6" fill="#059669" stroke="#ffffff" stroke-width="1.8" />
+                  <text x="${p.lx + p.lw/2}" y="${p.ly + p.lh/2 + 3.5}" fill="#ffffff" font-size="${p.lh > 24 ? 8.5 : 7.5}" font-weight="900" font-family="'Nunito', sans-serif" text-anchor="middle">✓ ${p.name}</text>
+                </g>
+              `;
+            } else {
+              svgElements += `
+                <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                  <rect x="${p.lx - 3}" y="${p.ly - 2}" width="${p.lw + 6}" height="${p.lh + 4}" rx="6" fill="#0284c7" stroke="#ffffff" stroke-width="1.8" />
+                  <text x="${p.lx + p.lw/2}" y="${p.ly + p.lh/2 + 4}" fill="#ffffff" font-size="11" font-weight="900" font-family="'Nunito', sans-serif" text-anchor="middle">?</text>
+                </g>
+              `;
+            }
+          }
+
+          // 2. Hotspots on the boat / part itself
+          if (this.exploreMode) {
+            svgElements += `
+              <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                <circle cx="${p.tx}" cy="${p.ty}" r="${isExplored ? 11 : 7}" fill="${isExplored ? '#0284c7' : '#f59e0b'}" stroke="#ffffff" stroke-width="2" />
+                ${isExplored ? `<circle cx="${p.tx}" cy="${p.ty}" r="17" fill="none" stroke="#0284c7" stroke-width="2" opacity="0.6" />` : ''}
+                <circle cx="${p.tx}" cy="${p.ty}" r="22" fill="transparent" />
+              </g>
+            `;
+          } else {
+            if (isSolved) {
+              svgElements += `
+                <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                  <circle cx="${p.tx}" cy="${p.ty}" r="9" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+                  <text x="${p.tx}" y="${p.ty + 3.5}" fill="#ffffff" font-size="9" font-weight="900" font-family="'Nunito', sans-serif" text-anchor="middle">✓</text>
+                </g>
+              `;
+            } else {
+              svgElements += `
+                <g onclick="app.handlePartClick('${p.id}')" class="interactive-zone">
+                  <circle cx="${p.tx}" cy="${p.ty}" r="14" fill="#38bdf8" fill-opacity="0.3" stroke="#0284c7" stroke-width="2" />
+                  <circle cx="${p.tx}" cy="${p.ty}" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="1.5" />
+                  <circle cx="${p.tx}" cy="${p.ty}" r="22" fill="transparent" />
+                </g>
+              `;
+            }
+          }
+        });
+
+        // Bottom Feedback Card
+        let feedbackHtml = '';
+        if (this.exploreMode) {
+          if (this.exploredPart) {
+            feedbackHtml = `
+              <div class="mt-3 p-3.5 rounded-2xl bg-sky-50 border-2 border-sky-200 text-sky-950">
+                <div class="flex items-center justify-between font-black text-xs">
+                  <span class="text-sky-800 flex items-center gap-1">🧭 ${this.exploredPart.name}</span>
+                  <span class="bg-sky-200 text-sky-800 px-2 py-0.5 rounded-full text-[10px] font-black">YCN / PNA</span>
+                </div>
+                <p class="text-[11px] font-bold text-slate-700 mt-1.5 leading-snug">${this.exploredPart.desc}</p>
+                <div class="mt-2.5 pt-2 border-t border-sky-200 flex justify-end">
+                  <button onclick="app.setExploreMode(false)" class="text-[10px] font-black bg-sky-600 text-white px-3 py-1 rounded-xl btn-3d">
+                    Probar en Desafío 🎯
+                  </button>
+                </div>
+              </div>
+            `;
+          } else {
+            feedbackHtml = `
+              <p class="text-center text-[11px] font-bold text-slate-400 mt-2">
+                Toca cualquier etiqueta o pin en el gráfico para inspeccionar su función.
+              </p>
+            `;
+          }
+        } else {
+          if (this.tactileSuccess === true && this.tactileClicked) {
+            feedbackHtml = `
+              <div class="mt-3 p-3.5 rounded-2xl bg-emerald-100 border-2 border-emerald-300 text-emerald-950">
+                <div class="flex items-center justify-between font-black text-xs">
+                  <span class="flex items-center gap-1.5">🎯 ¡Excelente! ${this.tactileClicked.name}</span>
+                  <span class="bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full text-[10px] font-black">+20 XP</span>
+                </div>
+                <p class="text-[11px] font-bold text-slate-700 mt-1 leading-snug">${this.tactileClicked.desc}</p>
+              </div>
+            `;
+          } else if (this.tactileSuccess === false) {
+            feedbackHtml = `
+              <div class="mt-3 p-3.5 rounded-2xl bg-rose-100 border-2 border-rose-300 text-rose-950">
+                <div class="flex items-center justify-between font-black text-xs">
+                  <span>❌ Zona incorrecta</span>
+                  <span class="text-rose-600 text-[10px] font-extrabold">-1 ❤️</span>
+                </div>
+                <p class="text-[11px] font-bold text-slate-700 mt-1 leading-snug">
+                  ${this.tactileClicked ? `Tocaste <b>${this.tactileClicked.name}</b>.` : ''}
+                  <span class="text-rose-800">Pista para <b>${this.tactileTarget ? this.tactileTarget.name : ''}</b>: ${this.tactileTarget ? this.tactileTarget.desc : ''}</span>
+                </p>
+              </div>
+            `;
+          } else if (!isComplete && this.tactileTarget) {
+            feedbackHtml = `
+              <p class="text-center text-[11px] font-bold text-slate-400 mt-2">
+                Toca el pin en el gráfico o el botón <b>[?]</b> correspondiente.
+              </p>
+            `;
+          }
+        }
+
+        // Action button
+        let actionBtnHtml = '';
+        if (!this.exploreMode && this.tactileSuccess !== null) {
+          actionBtnHtml = `
+            <div class="pt-3 mt-auto">
+              <button onclick="app.nextTactile(); app.render();" class="w-full py-3.5 rounded-2xl font-black text-sm text-white bg-sky-500 border-b-4 border-sky-700 active:border-b-0 btn-3d">
+                SIGUIENTE PARTE →
+              </button>
+            </div>
+          `;
+        }
+
+        container.innerHTML = `
+          <div class="flex flex-col h-full justify-between pb-8">
+            <div>
+              <!-- 4 FIGURAS SELECTORAS -->
+              <div class="grid grid-cols-4 gap-1.5 mb-3">
+                ${figTabsHtml}
+              </div>
+
+              <!-- SELECTOR DE MODO -->
+              ${modeSwitchHtml}
+
+              <!-- PROMPT -->
+              ${promptHtml}
+
+              <!-- DIAGRAMA OFICIAL AUTÉNTICO CON CAPA SVG INTERACTIVA -->
+              <div class="bg-white rounded-3xl p-1.5 border-2 border-slate-200 shadow-sm relative overflow-hidden select-none">
+                <div class="relative w-full rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center">
+                  <img src="${fig.image}" alt="${fig.title}" class="w-full h-auto block select-none pointer-events-none" />
+                  <svg viewBox="0 0 ${fig.w} ${fig.h}" class="absolute inset-0 w-full h-full select-none cursor-pointer">
+                    ${svgElements}
+                  </svg>
+                </div>
+              </div>
+
+              <!-- FEEDBACK -->
+              ${feedbackHtml}
+            </div>
+
+            <!-- BOTÓN DE ACCIÓN -->
+            ${actionBtnHtml}
+          </div>
+        `;
+      },
+
+      renderFlashcards(container) {
+        const card = FLASHCARDS[this.cardIndex];
+        container.innerHTML = `
+          <div class="flex flex-col h-full justify-between pb-8">
+            <div>
+              <div class="flex items-center justify-between mb-3 text-slate-400 font-extrabold text-xs">
+                <span>MANUAL OFICIAL YCN (TEMARIO COMPLETO)</span>
+                <span>${this.cardIndex + 1} / ${FLASHCARDS.length}</span>
+              </div>
+
+              <div class="flashcard w-full h-72 cursor-pointer ${this.isFlipped ? 'flipped' : ''}" onclick="app.isFlipped = !app.isFlipped; app.render();">
+                <div class="flashcard-inner relative w-full h-full rounded-3xl shadow-md border-2 border-slate-200">
+                  
+                  <div class="flashcard-front absolute w-full h-full bg-gradient-to-br from-white to-sky-50 rounded-3xl p-6 flex flex-col justify-between items-center text-center">
+                    <span class="text-3xl">🧭</span>
+                    <h3 class="text-lg font-black text-sky-800">${card.f}</h3>
+                    <span class="text-[11px] font-extrabold text-sky-500 bg-sky-100 px-3 py-1 rounded-full">
+                      Toca para girar 🔄
+                    </span>
+                  </div>
+
+                  <div class="flashcard-back absolute w-full h-full bg-slate-800 rounded-3xl p-6 flex flex-col justify-between items-center text-center text-white">
+                    <span class="text-xs font-black uppercase text-amber-400 tracking-wider">Definición Reglamentaria</span>
+                    <p class="text-xs font-bold text-slate-200 leading-relaxed whitespace-pre-line">${card.b}</p>
+                    <span class="text-[10px] font-bold text-slate-400">Escuela Náutica Yacht Club Neuquén</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 pt-4 mt-auto">
+              <button onclick="app.prevCard()" class="flex-1 py-3 rounded-2xl font-black text-xs text-slate-700 bg-white border-2 border-slate-200 active:bg-slate-100 btn-3d">
+                ← Anterior
+              </button>
+              <button onclick="app.nextCard()" class="flex-1 py-3 rounded-2xl font-black text-xs text-white bg-sky-500 border-b-4 border-sky-700 active:border-b-0 btn-3d">
+                Siguiente →
+              </button>
+            </div>
+          </div>
+        `;
+      },
+
+      nextCard() {
+        this.cardIndex = (this.cardIndex + 1) % FLASHCARDS.length;
+        this.isFlipped = false;
+        this.render();
+      },
+
+      prevCard() {
+        this.cardIndex = (this.cardIndex - 1 + FLASHCARDS.length) % FLASHCARDS.length;
+        this.isFlipped = false;
+        this.render();
+      },
+
+      startExam() {
+        let all = [];
+        Object.values(QUESTION_BANK).forEach(arr => {
+          arr.forEach(q => {
+            const mapped = q.options.map((text, idx) => ({
+              text,
+              isCorrect: idx === q.correct
+            }));
+            const shuffled = [...mapped].sort(() => Math.random() - 0.5);
+            const newCorrect = shuffled.findIndex(item => item.isCorrect);
+            all.push({
+              q: q.q,
+              options: shuffled.map(item => item.text),
+              correct: newCorrect,
+              exp: q.exp
+            });
+          });
+        });
+        this.examQuestions = all.sort(() => Math.random() - 0.5).slice(0, 10);
+        this.examIndex = 0;
+        this.examScore = 0;
+        this.selectedOption = null;
+        this.isAnswered = false;
+      },
+
+      renderExam(container) {
+        if (this.examIndex >= this.examQuestions.length) {
+          const passed = this.examScore >= 7;
+          container.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full text-center p-4">
+              <div class="text-6xl mb-3">${passed ? '🏅' : '⚓'}</div>
+              <h2 class="text-2xl font-black text-slate-800">${passed ? '¡APROBADO!' : 'A REPASAR'}</h2>
+              <p class="text-xs font-bold text-slate-500 mt-1">Simulacro Oficial Timonel YCN / PNA</p>
+              
+              <div class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-6 w-full max-w-xs my-6">
+                <span class="text-3xl font-black ${passed ? 'text-emerald-500' : 'text-rose-500'}">${this.examScore} / 10</span>
+                <p class="text-[11px] font-extrabold text-slate-400 mt-1">${passed ? 'Cumpliste con el 70% reglamentario' : 'Necesitas al menos 7 respuestas correctas'}</p>
+              </div>
+
+              <button onclick="app.startExam(); app.render();" class="w-full max-w-xs py-3.5 rounded-2xl font-black text-sm text-white bg-sky-500 border-b-4 border-sky-700 active:border-b-0 btn-3d">
+                VOLVER A RENDIR
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        const q = this.examQuestions[this.examIndex];
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+          let btnStyle = "bg-white border-2 border-slate-200 text-slate-700 hover:border-slate-300";
+          if (this.selectedOption === idx) {
+            btnStyle = "bg-sky-50 border-2 border-sky-500 text-sky-800 shadow-sm";
+          }
+          if (this.isAnswered) {
+            if (idx === q.correct) btnStyle = "bg-emerald-50 border-2 border-emerald-500 text-emerald-800 font-black";
+            else if (this.selectedOption === idx) btnStyle = "bg-rose-50 border-2 border-rose-500 text-rose-800 line-through";
+            else btnStyle = "bg-slate-50 border border-slate-200 text-slate-400 opacity-60";
+          }
+
+          optionsHtml += `
+            <button onclick="app.selectOption(${idx})" ${this.isAnswered ? 'disabled' : ''} class="w-full text-left p-3.5 rounded-2xl font-bold text-xs leading-relaxed btn-3d ${btnStyle} flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
+              <span class="flex-1">${opt}</span>
+            </button>
+          `;
+        });
+
+        container.innerHTML = `
+          <div class="flex flex-col h-full justify-between pb-8">
+            <div>
+              <div class="flex items-center justify-between mb-3 text-slate-400 font-extrabold text-xs">
+                <span>SIMULACRO EXAMEN OFICIAL</span>
+                <span>${this.examIndex + 1} / 10</span>
+              </div>
+
+              <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-4 mb-4">
+                <span class="text-[10px] font-black uppercase text-indigo-600 tracking-wider">Pregunta de Examen</span>
+                <h3 class="text-sm font-black text-slate-800 mt-1 leading-snug">${q.q}</h3>
+              </div>
+
+              <div class="space-y-2.5">
+                ${optionsHtml}
+              </div>
+            </div>
+
+            <div class="pt-4 mt-auto">
+              ${!this.isAnswered ? `
+                <button onclick="app.checkExamAnswer()" ${this.selectedOption === null ? 'disabled' : ''} class="w-full py-3.5 rounded-2xl font-black text-sm text-white bg-indigo-600 border-b-4 border-indigo-800 active:border-b-0 btn-3d disabled:opacity-40 disabled:pointer-events-none">
+                  CONFIRMAR RESPUESTA
+                </button>
+              ` : `
+                <button onclick="app.nextExamQuestion()" class="w-full py-3.5 rounded-2xl font-black text-sm text-white bg-sky-500 border-b-4 border-sky-700 active:border-b-0 btn-3d">
+                  SIGUIENTE →
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      },
+
+      checkExamAnswer() {
+        if (this.selectedOption === null || this.isAnswered) return;
+        this.isAnswered = true;
+        const q = this.examQuestions[this.examIndex];
+        if (this.selectedOption === q.correct) {
+          Sound.playSuccess();
+          this.examScore++;
+        } else {
+          Sound.playError();
+        }
+        this.render();
+      },
+
+      nextExamQuestion() {
+        this.examIndex++;
+        this.selectedOption = null;
+        this.isAnswered = false;
+        this.render();
+      }
+    };
+
+    window.onload = () => app.init();
+  </script>
+</body>
+</html>
