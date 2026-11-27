@@ -213,414 +213,1425 @@
             "Es la corriente de agua que frena el avance del quillote."
           ],
           correct: 0,
-          exp: "El viento aparente es la resultante del viento real y el generado por la velocidad del barco. Es el viento sobre el cual debemos trimar (ajustar) las velas."
+          exp: "El viento aparente es la resultante vectorial del viento real y el generado por la velocidad del barco. Las velas se orientan y triman SIEMPRE en función del viento aparente."
         },
         {
           q: "Al navegar en ceñida (cerrado hacia el viento), ¿de qué lado de la vela se genera la mayor fuerza de empuje?",
           options: [
+            "En la cara de sotavento, por la succión (depresión) que crea el aire al acelerar en la curvatura.",
             "En la cara de barlovento, por el empuje directo del aire que choca en la tela.",
-            "En la cara de sotavento, por la succión (depresión) que crea el aire al acelerar.",
             "Únicamente en el puño de driza en el tope del mástil.",
             "En la botavara debido al peso que ejerce hacia abajo."
           ],
-          correct: 1,
-          exp: "Al igual que el ala de un avión, el aire acelera por la cara convexa (sotavento) creando succión o depresión, que aporta la mayor fuerza de avance."
+          correct: 0,
+          exp: "Al igual que el ala de un avión (perfil alar), el aire acelera por la cara convexa (sotavento) creando baja presión o succión, responsable del 70-80% del empuje."
         },
         {
           q: "Cuando el timonel da la orden de 'ORZAR', ¿hacia dónde debe mover la proa del velero?",
           options: [
-            "Hacia la dirección de donde viene el viento (cerrar el rumbo al viento).",
-            "Alejándola de la dirección del viento (abrir el rumbo).",
+            "Hacia barlovento (aproximar la proa a la dirección de donde viene el viento).",
+            "Hacia sotavento (alejar la proa del viento para abrir el rumbo).",
             "Hacia la popa dando marcha atrás con el motor auxiliar.",
             "Hacia el muelle más cercano para fondear de emergencia."
           ],
           correct: 0,
-          exp: "Orzar significa llevar la proa más cerca del viento. Lo contrario es 'arribar', que significa alejar la proa del viento."
+          exp: "Orzar significa alterar el rumbo hacia barlovento (cerrar el rumbo al viento). Lo contrario es derivar (o arribar), que significa alejar la proa del viento hacia sotavento."
+        },
+        {
+          q: "¿Cuál es la función específica que diferencia a las drizas de las escotas a bordo de un velero?",
+          options: [
+            "Las drizas se usan para izar o arriar las velas; las escotas para cazarlas, filarlas y regular su ángulo al viento.",
+            "Las drizas sostienen el mástil a las bandas y las escotas sujetan el ancla al fondo.",
+            "Las drizas son cables metálicos fijos y las escotas son cabos elásticos de remolque.",
+            "Las drizas controlan el timón y las escotas ajustan la velocidad del motor."
+          ],
+          correct: 0,
+          exp: "Driza = cabo para izar o arriar la vela (llevarla al tope del palo). Escota = cabo para cazar o filar la vela (regular su orientación angular respecto al viento y la línea de crujía)."
+        },
+        {
+          q: "¿En qué se diferencia fundamentalmente una 'virada por avante' de una 'virada en redondo' (trasluchada)?",
+          options: [
+            "En la virada por avante la proa cruza la línea del viento orzando; en la virada en redondo la popa cruza el viento derivando.",
+            "En la virada por avante el barco se detiene con el ancla y en la virada en redondo utiliza el motor.",
+            "La virada por avante solo se realiza en puertos y la virada en redondo en mar abierto.",
+            "No hay diferencia; son dos términos náuticos que describen exactamente la misma maniobra."
+          ],
+          correct: 0,
+          exp: "Virar por avante: se orza pasando la proa por el viento para cambiar de amura. Virar en redondo (o trasluchar): se deriva pasando la popa por el viento; la botavara pasa de banda con rapidez."
+        },
+        {
+          q: "¿Cómo se define la condición de navegación con viento 'al descuartelar'?",
+          options: [
+            "Navegar recibiendo el viento en un rumbo intermedio entre la ceñida y el través (por la amura).",
+            "Navegar con el viento entrando exactamente por la aleta a 135° del rumbo.",
+            "Navegar con viento de popa cerrada llevando las velas abiertas a ambas bandas.",
+            "Quedar enfachado con la proa exactamente apuntando hacia el viento sin avance."
+          ],
+          correct: 0,
+          exp: "Viento al descuartelar es el rumbo en el cual el viento relativo ingresa por la amura, situado entre la ceñida (ángulo mínimo contra el viento) y el través (90° respecto al eje de crujía)."
+        },
+        {
+          q: "¿A qué maniobra marinera se denomina navegar 'a orejas de burro'?",
+          options: [
+            "Navegar en popa redonda llevando la vela mayor abierta a una banda y el foque abierto a la banda contraria.",
+            "Navegar remolcando dos chinchorros en paralelo por la popa del velero.",
+            "Atracar el velero colocando dos anclas por la proa separadas 45 grados.",
+            "Izar dos velas mayores simultáneas en mástiles paralelos."
+          ],
+          correct: 0,
+          exp: "Navegar a orejas de burro es llevar la mayor a una banda y la vela de proa (foque/génova) atangonada a la banda opuesta para aprovechar el viento en popa limpia sin desvente mutuo."
+        },
+        {
+          q: "¿Qué son las 'relingas' de una vela y qué función cumplen?",
+          options: [
+            "Cabos o nervaduras cosidos en los bordes de las velas (grátil o pujamen) para embutirse en las ranuras del mástil o botavara.",
+            "Tiras de madera o fibra insertadas en la baluma para evitar que flamee.",
+            "Orificios metálicos reforzados para pasar los amantes de rizos.",
+            "Cabos de seguridad para amarrar la embarcación a los postes del muelle."
+          ],
+          correct: 0,
+          exp: "Las relingas son cabos o relingas plásticas cosidas a lo largo del grátil o pujamen que corren por dentro de la relinga o ranura del palo y la botavara para afirmar el paño."
+        },
+        {
+          q: "Un velero correctamente diseñado y equilibrado en sus velas, al soltar la caña del timón debe tender levemente a...",
+          options: [
+            "Orzar (ir proa al viento por seguridad), lo que se conoce como barco con tendencia ardiente.",
+            "Derivar rápidamente hacia sotavento (barco blando o caído de proa).",
+            "Hacer giros en trompo de 360 grados sin control.",
+            "Hundir la proa de inmediato aumentando el calado estructural."
+          ],
+          correct: 0,
+          exp: "Por seguridad naval, todo velero debe ser ligeramente 'ardiente': al soltar el timón debe tender a orzar y desarmar el viento, deteniéndose en lugar de derivar y trasluchar descontroladamente."
         }
       ],
       u1_2: [
         {
-          q: "¿En qué sector de una carta náutica Mercator se deben medir SIEMPRE las distancias?",
+          q: "¿En qué sector de una carta náutica Mercator se deben medir SIEMPRE las distancias entre puntos?",
           options: [
-            "En la escala horizontal de longitudes (márgenes superior e inferior).",
-            "En la escala lateral de latitudes, donde 1 minuto (1') equivale a 1 milla náutica.",
-            "En la rosa de los vientos del centro de la carta con una regla común.",
-            "En cualquier sector de la carta multiplicando los milímetros por diez."
-          ],
-          correct: 1,
-          exp: "¡Regla sagrada de navegación! Las distancias se miden siempre en la escala lateral de latitudes. 1 minuto de latitud = 1 milla náutica = 1.852 metros."
-        },
+            "En la escala lateral de latitudes, donde 1 minuto de arco (1') equivale a 1 milla náutica.",
+            "En la escala horizontal de longitudes ubicada en los bordes superior e inferior.",
+            "En el centro de la rosa de los vientos utilizando un transportador circular.",
+            "En cualquier cuadrícula de la carta multiplicando los centímetros por dos.",
         {
-          q: "¿Qué representa la cota de 'Cero de Cartas' respecto a las profundidades impresas en la carta?",
+          q: "En la carta de aproximación a Colonia del Sacramento (H-153A), ¿qué paso o canal natural balizado se encuentra entre la costa continental y la Isla San Gabriel?",
           options: [
-            "El nivel de la marea astronómica más baja, garantizando que casi siempre habrá igual o más agua.",
-            "La profundidad promedio alcanzada durante las pleamares del mediodía.",
-            "La profundidad máxima producida en días de temporal con sudestada.",
-            "La línea de flotación promedio de aguas calmas sin contar el oleaje."
+            "El Canal San Gabriel, protegido por la restinga y las islas López, balizado para el acceso de embarcaciones hacia la bahía y puerto de Colonia.",
+            "El Canal Emilio Mitre, dragado para buques portacontenedores de ultramar.",
+            "El Canal de la Mancha del Sur, exclusivo para barcos pesqueros de arrastre oceánico.",
+            "El Canal Costanero Norte, de libre navegación sin sondas de profundidad."
           ],
           correct: 0,
-          exp: "El Cero de Cartas corresponde a las bajamares más bajas astronómicas. La profundidad real es la sonda de la carta más la altura de marea del momento."
+          exp: "En la aproximación a Colonia del Sacramento (Carta H-153A), el Canal San Gabriel discurre al norte de la Isla San Gabriel y el Faro de Farallón, sirviendo como vía de acceso resguardada hacia la bahía de Colonia y sus fondeaderos."
+        },
+        {
+          q: "En cartas náuticas oficiales como la H-118 (Río de la Plata - Buenos Aires a Playa Honda), ¿qué representan los polígonos delimitados con leyendas como 'Zona de Vertedero' o 'Cables Submarinos'?",
+          options: [
+            "Áreas de riesgo o restricción donde no se debe fondear por peligro de enganche, falta de profundidad por descarga de sedimentos de dragado o daño a instalaciones submarinas.",
+            "Sectores reservados exclusivamente para regatas de veleros los fines de semana.",
+            "Canales de velocidad libre donde no rige la velocidad de gobierno.",
+            "Zonas donde la corriente del río fluye siempre a más de 5 nudos hacia el norte."
+          ],
+          correct: 0,
+          exp: "Las cartas del SHN demarcan zonas de vertedero (donde las dragas arrojan refulado modificando las profundidades) y trazas de cables o emisarios submarinos. En estos sectores está terminantemente prohibido fondear o arrastrar anclas."
+        }
+          ],
+          correct: 0,
+          exp: "¡Regla sagrada! En la proyección Mercator, la escala de longitud se distorsiona con la latitud. Por eso las distancias se miden ÚNICAMENTE en la escala de latitudes a la altura de la zona navegada (1' = 1 M = 1.852 m)."
+        },
+        {
+          q: "¿Qué representa la cota de 'Cero de Cartas' respecto a las profundidades impresas en la carta náutica?",
+          options: [
+            "El plano de reducción de sondajes (bajamar media de sicigias), garantizando que casi siempre habrá igual o más agua.",
+            "El nivel del agua durante las mayores crecidas y pleamares extraordinarias del año.",
+            "La profundidad media registrada durante los meses de invierno en marea muerta.",
+            "La distancia entre la superficie del agua y la quilla del barco más grande del puerto."
+          ],
+          correct: 0,
+          exp: "El Cero de Cartas (Plano de Reducción de Sondajes) toma como referencia las bajamares más bajas astronómicas para que las profundidades indicadas sean mínimas garantizadas."
         },
         {
           q: "En una carta náutica observas las letras 'A', 'F' y 'P' sobre el fondo. ¿Cuáles son los mejores tenederos para fondear?",
           options: [
-            "P (Piedra), porque las uñas del ancla se traban con gran firmeza.",
-            "F (Fango) y A (Arena), porque ofrecen excelente agarre para que el ancla muerda.",
+            "F (Fango) y A (Arena), porque ofrecen excelente agarre para que las uñas del ancla muerdan.",
+            "P (Piedra), porque las uñas del ancla se traban con gran firmeza y no resbalan.",
             "L (Limo) es el único fondo autorizado por las autoridades náuticas.",
             "Ninguno de los tres; únicamente se puede fondear sobre lechos de cemento o tosca."
           ],
-          correct: 1,
-          exp: "A = Arena y F = Fango son muy buenos tenederos donde el ancla clava con facilidad. P = Piedra es riesgoso porque el ancla puede garrear o trabarse sin poder recuperarla."
+          correct: 0,
+          exp: "A = Arena y F = Fango son excelentes tenederos donde el ancla clava con facilidad y firmeza. P = Piedra es riesgoso porque el ancla puede garrear o trabarse sin poder recuperarla."
+        },
+        {
+          q: "¿Qué publicación edita el Servicio de Hidrografía Naval (S.H.N.) para descifrar los símbolos de las cartas y cuál para mantenerlas actualizadas?",
+          options: [
+            "El folleto 'Patrón de Signos, Abreviaturas y Términos' y el boletín mensual 'Avisos a los Navegantes'.",
+            "El Código Internacional de Señales y la Guía Telefónica Costera.",
+            "El Boletín Oficial Marítimo y la Reglamentación de Aduanas.",
+            "La Tabla de Mareas Fluviales y el Manual de Motores Diésel."
+          ],
+          correct: 0,
+          exp: "El S.H.N. edita el 'Patrón de Signos, Abreviaturas y Términos' (H-5000) para interpretar la simbología y 'Avisos a los Navegantes' mensualmente para volcar correcciones a cartas y derroteros."
+        },
+        {
+          q: "¿Cómo se denomina en cartografía náutica a la carta de navegación a gran escala que representa en detalle un puerto, fondeadero o paso angosto?",
+          options: [
+            "Cuarterón.",
+            "Croquis de estima.",
+            "Carta general oceánica.",
+            "Derrotero costero."
+          ],
+          correct: 0,
+          exp: "Un cuarterón es una carta náutica de escala muy grande (mucho detalle de profundidades, muelles, balizas y escollera) levantada específicamente para un puerto o caleta."
+        },
+        {
+          q: "¿Qué son los 'Derroteros' editados por los servicios hidrográficos?",
+          options: [
+            "Libros que contienen descripciones textuales minuciosas de las costas, puertos, accesos, peligros y facilidades de cada zona.",
+            "Mapas esquemáticos simplificados que no incluyen profundidades ni balizamiento.",
+            "Cuadernos de bitácora donde el timonel anota el rumbo cada dos horas.",
+            "Reglas metálicas articuladas que se usan para tirar rumbos en la mesa de navegación."
+          ],
+          correct: 0,
+          exp: "Los Derroteros complementan las cartas náuticas aportando datos que no caben en el dibujo: descripción visual de costas, puntos de recalada, corrientes dominantes, vientos y servicios portuarios."
+        },
+        {
+          q: "¿Cómo se miden reglamentariamente los rumbos náuticos en la rosa de los vientos y en la carta náutica?",
+          options: [
+            "En el sistema circular de 000° a 360°, medidos en sentido horario (hacia la derecha) a partir del Norte (000°).",
+            "De 0° a 90° hacia el Este o hacia el Oeste según el cuadrante del horizonte.",
+            "A partir del Sur astronómico (000°) hacia el Norte en sentido antihorario.",
+            "En puntos o cuartas de 45 grados sin decimales numéricos."
+          ],
+          correct: 0,
+          exp: "El sistema moderno de rumbos es sexagesimal circular: 000° es el Norte, 090° el Este, 180° el Sur y 270° el Oeste, contados siempre en sentido horario de 000° a 360°."
+        },
+        {
+          q: "¿Cuáles son los instrumentos tradicionales para trazar rumbos, demoras y transportar rectas de posición en la carta de papel?",
+          options: [
+            "Reglas paralelas, regla transportador (talco), compás de puntas secas y escuadras.",
+            "Cinta métrica de carpintero, compás magnético de mano y tijeras de lona.",
+            "Calibre Vernier, escuadra de albañil y micrómetro de precisión.",
+            "Nivel de burbuja, regla T de madera y lápiz de cera indeleble."
+          ],
+          correct: 0,
+          exp: "Para trabajar en la mesa de cartas se utiliza el talco (regla transportador) o las reglas paralelas para transportar ángulos desde la rosa de la carta, y el compás de puntas secas para medir distancias."
         }
       ],
       u1_3: [
         {
-          q: "¿Para qué sirve en la práctica la 'Regla de los Duodécimos' en zonas de marea?",
+          q: "¿Para qué sirve en la práctica la 'Regla de los Duodécimos' en zonas de marea astronómica?",
           options: [
-            "Para estimar cuánto sube o baja el agua en cada una de las 6 horas entre bajamar y pleamar.",
-            "Para calcular cuántas millas náuticas recorre el barco en doce horas de navegación.",
-            "Para conocer el consumo horario de combustible del motor auxiliar.",
-            "Para determinar el ángulo de escora del velero con viento de través."
+            "Para estimar la altura de agua que sube o baja en cada una de las 6 horas de duración de la marea: 1/12, 2/12, 3/12, 3/12, 2/12 y 1/12 de la amplitud.",
+            "Para calcular el consumo horario de combustible del motor dividiendo por doce.",
+            "Para determinar el ángulo de desvío del compás en doce cuadrantes magnéticos.",
+            "Para fijar la distancia máxima a la costa permitida por la habilitación náutica."
           ],
           correct: 0,
-          exp: "La amplitud de marea se reparte en doceavos en 6 horas: 1/12 en la 1ª hora, 2/12 en la 2ª, 3/12 en la 3ª, 3/12 en la 4ª, 2/12 en la 5ª y 1/12 en la 6ª."
+          exp: "La curva de marea es sinusoidal: en las 6 horas entre bajamar y pleamar, el agua sube 1/12 en la 1ª hora, 2/12 en la 2ª, 3/12 en la 3ª y 4ª (máxima velocidad), 2/12 en la 5ª y 1/12 en la 6ª."
         },
         {
-          q: "¿En qué fases lunares se producen las 'Mareas Vivas' o de Sicigia (máximas pleamares y bajamares)?",
+          q: "¿Qué diferencia a las mareas de 'sicigia' de las mareas de 'cuadratura' y con qué fases lunares coinciden?",
           options: [
-            "En Luna Llena y Luna Nueva, cuando el Sol y la Luna alinean sus fuerzas de atracción.",
-            "En Cuarto Creciente y Cuarto Menguante, cuando las fuerzas se contrarrestan.",
-            "Únicamente durante los solsticios de verano en días de calma.",
-            "Cuando la luna no es visible durante noches de niebla."
+            "Sicigias (en Luna Nueva y Llena) tienen máxima amplitud; Cuadraturas (en Creciente y Menguante) tienen mínima amplitud.",
+            "Sicigias tienen la marea completamente fija y Cuadraturas tienen olas gigantescas.",
+            "Sicigias ocurren en otoño y Cuadraturas en primavera sin relación con la Luna.",
+            "Sicigias ocurren solo de día y Cuadraturas solo en horas nocturnas."
           ],
           correct: 0,
-          exp: "En Luna Nueva y Llena (Sicigias), Sol, Luna y Tierra están alineados, sumando fuerzas de marea y produciendo las máximas subidas y bajadas."
+          exp: "En Luna Nueva y Llena (Sol y Luna alineados en sicigia), las fuerzas gravitatorias se suman generando mareas vivas de gran amplitud. En cuartos (cuadratura a 90°), se restan generando mareas muertas."
         },
         {
-          q: "El compás (brújula) señala hacia el Norte Magnético, que no coincide con el Norte Geográfico de la carta. ¿Cómo se llama esa diferencia?",
+          q: "Navegando sobre un banco, la profundidad anotada en la carta es de 2,20 m. El escandallo (sonda de mano) marca 3,00 m reales. ¿Cuál es la altura de marea en ese instante?",
           options: [
-            "Desvío de rueda del timón.",
-            "Declinación Magnética (dm).",
-            "Abatimiento lateral del casco.",
-            "Deriva de corriente de superficie."
+            "0,80 metros.",
+            "5,20 metros.",
+            "1,20 metros.",
+            "0,40 metros."
           ],
-          correct: 1,
-          exp: "La Declinación Magnética (dm) es el ángulo entre el Norte Verdadero y el Norte Magnético. Se lee en la rosa de la carta náutica junto con su variación anual."
+          correct: 0,
+          exp: "Fórmula de sondaje: Sondaje real (S) = Profundidad de carta (P) + Altura de marea (h). Despejando: h = S - P = 3,00 m - 2,20 m = 0,80 m."
+        },
+        {
+          q: "Su embarcación cala 1,50 m. La profundidad en la carta del paso crítico es de 1,40 m y la marea mínima prevista es de 0,30 m. ¿Cuánto margen de agua libre queda debajo de la quilla?",
+          options: [
+            "0,20 metros.",
+            "0,50 metros.",
+            "1,20 metros.",
+            "Cero metros (varadura inmediata)."
+          ],
+          correct: 0,
+          exp: "Profundidad total disponible = Carta (1,40 m) + Marea (0,30 m) = 1,70 m. Margen bajo la quilla = Profundidad disponible (1,70 m) - Calado (1,50 m) = 0,20 m."
+        },
+        {
+          q: "¿Cómo se denomina al régimen de mareas típico del litoral marítimo argentino que presenta dos pleamares y dos bajamares en un día lunar?",
+          options: [
+            "Régimen semidiurno.",
+            "Régimen diurno puro.",
+            "Régimen de marea estática.",
+            "Régimen de seiche lacustre."
+          ],
+          correct: 0,
+          exp: "El régimen semidiurno presenta dos pleamares y dos bajamares cada 24 horas 50 minutos (día lunar), con amplitudes y duraciones similares entre sí."
+        },
+        {
+          q: "¿Qué es la 'Declinación Magnética' (dm) y por qué se aclara su 'variación anual' en la carta náutica?",
+          options: [
+            "Es el ángulo entre el Norte Verdadero y el Norte Magnético; varía localmente y cambia con el transcurso de los años por el movimiento del polo magnético.",
+            "Es el error producido por el motor y los hierros del barco sobre la brújula.",
+            "Es el desvío que causa el viento sobre las velas a lo largo del año.",
+            "Es la inclinación del mástil producida por la tensión de los obenques."
+          ],
+          correct: 0,
+          exp: "El polo magnético terrestre no coincide con el polo geográfico y se desplaza constantemente. La carta indica la declinación para el año de edición y cuántos minutos aumenta o disminuye por año."
+        },
+        {
+          q: "Navegas a un Rumbo de Compás (Rc) de 120° en una zona con Declinación Magnética de 7° W (oeste) y tu compás tiene un desvío de -3°. ¿Cuál es tu Rumbo Verdadero (Rv) trazado en la carta?",
+          options: [
+            "110°.",
+            "130°.",
+            "124°.",
+            "117°."
+          ],
+          correct: 0,
+          exp: "Fórmula de corrección de rumbos: Rv = Rc + Desvío + Declinación (respetando signos: W es negativo). Rv = 120° + (-3°) + (-7°) = 120° - 10° = 110°."
+        },
+        {
+          q: "Debes remontar un río a motor recorriendo 40 millas náuticas. Tu velocidad sobre el agua es de 6 nudos y tienes una corriente de proa constante de 2 nudos. ¿Cuánto tiempo tardarás?",
+          options: [
+            "10 horas.",
+            "6,6 horas.",
+            "5 horas.",
+            "8 horas."
+          ],
+          correct: 0,
+          exp: "Velocidad efectiva sobre el fondo = Velocidad de propulsión (6 nudos) - Corriente en contra (2 nudos) = 4 nudos efectivos. Tiempo = Distancia / Velocidad = 40 millas / 4 nudos = 10 horas."
+        },
+        {
+          q: "¿Con qué instrumento náutico se mide la velocidad de un barco sobre el agua y a qué equivale exactamente un 'nudo'?",
+          options: [
+            "Se mide con la corredera; un nudo equivale a una velocidad de una milla náutica por hora (1.852 m/h).",
+            "Se mide con el anemómetro; un nudo equivale a diez kilómetros por hora.",
+            "Se mide con el escandallo; un nudo equivale a un metro por segundo.",
+            "Se mide con la pínula; un nudo equivale a una vuelta completa de hélice por minuto."
+          ],
+          correct: 0,
+          exp: "La corredera mide la velocidad a través del agua en 'nudos'. 1 nudo = 1 milla náutica por hora = 1,852 km/h. La distancia se obtiene integrando la velocidad en el tiempo transcurrido."
         }
       ],
       u2_1: [
         {
-          q: "¡Hombre al agua por la banda de estribor! ¿Cuál es la primera maniobra de timón que debe hacerse al instante?",
+          q: "¡Grito de '¡Hombre al agua por estribor!'! ¿Cuáles son las tres primeras acciones vitales que deben ejecutarse de inmediato?",
           options: [
-            "Meter timón a estribor (hacia la misma banda de caída) para alejar la popa y la hélice de la persona.",
-            "Meter timón a babor (banda contraria) para desviar la proa lo antes posible.",
-            "Poner timón al centro y acelerar a fondo para no perder velocidad de gobierno.",
-            "Dar marcha atrás de golpe con el timón centrado a la vía."
+            "Meter timón a la banda de caída (estribor) para alejar la hélice, arrojar el salvavidas circular y designar un vigía que no lo pierda de vista.",
+            "Dar marcha atrás a máxima potencia, arriar el ancla y solicitar auxilio por altavoz.",
+            "Girar el timón a la banda contraria (babor), acelerar hacia adelante y saltar al agua a rescatarlo.",
+            "Filar todas las escotas, fondear a popa y apagar la radio de a bordo."
           ],
           correct: 0,
-          exp: "¡Primer paso vital! Meter timón a la banda de caída para alejar la hélice del náufrago, gritar '¡Hombre al agua!' y arrojar de inmediato el salvavidas circular."
+          exp: "Acciones inmediatas: 1° Meter timón a la misma banda de caída (la popa y la hélice se alejan del náufrago), 2° Lanzar salvavidas circular, 3° Designar vigía exclusivo para señalarlo permanentemente."
         },
         {
-          q: "¿Cuál es el propósito de la maniobra de rescate conocida como 'Curva de Boutakov'?",
+          q: "¿En qué consiste la 'Maniobra de Boutakov' empleada en rescate de hombre al agua a motor?",
           options: [
-            "Retornar con precisión hacia la persona caída navegando en sentido inverso sobre la misma estela anterior.",
-            "Frenar el barco en seco fondeando un ancla de mar por la proa.",
-            "Realizar giros de 360° continuos hasta que el barco se detenga por fricción.",
-            "Detener el motor y aguardar a que la corriente acerque al náufrago."
+            "Caer 70° a la banda del náufrago, aguantar y luego meter timón a la banda contraria para retornar exactamente por la estela anterior.",
+            "Describir un círculo cerrado alrededor del náufrago lanzándole cabos de amarre.",
+            "Fondear dos anclas en tándem y virar el barco con el molinete.",
+            "Detener el motor y aguardar a que el viento empuje el barco hacia el náufrago."
           ],
           correct: 0,
-          exp: "Maniobra de Boutakov: caer 70° a la banda del náufrago, estabilizar y contravirar 180° para volver exactamente por la derrota y estela previa."
+          exp: "La curva de Boutakov permite volver exactamente sobre la propia derrota invirtiendo el rumbo en 180°, ideal con visibilidad reducida o de noche para reencontrar la estela."
+        },
+        {
+          q: "Al aproximarse a la persona en el agua para izarla a bordo, ¿cómo debe quedar orientada la embarcación?",
+          options: [
+            "Con la proa casi enfachada al viento para detener la arrancada (estropada), y el motor en punto muerto antes de hacer contacto.",
+            "Con el viento totalmente de popa navegando a toda velocidad.",
+            "Con el motor en marcha avante acelerado para mantener gobierno sobre la persona.",
+            "Atravesada al oleaje en la cara de barlovento del náufrago."
+          ],
+          correct: 0,
+          exp: "Al llegar, el barco debe detenerse casi enfachado (sin arrancada). Si es a motor, la hélice debe estar obligatoriamente en NEUTRO (o motor apagado) para no herir jamás a la persona."
         },
         {
           q: "Para desatracar a motor de un muelle estrecho utilizando un 'Spring de proa', ¿cómo se maniobra?",
           options: [
-            "Firme el spring de proa, timón hacia el muelle y avante despacio: la popa se abre al canal y se sale marcha atrás.",
-            "Se sueltan todas las amarras y se da marcha atrás a fondo con timón centrado.",
-            "Se acelera hacia adelante con timón al canal sin defensas en la roda.",
+            "Se deja firme el spring de proa con defensas en la roda, timón hacia el muelle y avante despacio: la popa se abre al canal y se sale marcha atrás.",
+            "Se sueltan todas las amarras y se da marcha atrás a fondo con timón a la vía.",
+            "Se acelera hacia adelante con timón al canal sin colocar defensas.",
             "Se vira el barco a mano con el bichero sin encender el motor."
           ],
           correct: 0,
-          exp: "Con el spring de proa y timón hacia el muelle, al dar avante la proa apoya en la defensa y la popa se separa ampliamente del muelle hacia el canal libre."
+          exp: "Al dar avante sobre el spring de proa (con timón al muelle), el barco pivota sobre la defensa de proa y la popa se abre ampliamente hacia el canal libre de obstáculos."
+        },
+        {
+          q: "¿Cuáles son los 3 pasos reglamentarios para ejecutar una trasluchada (virada en redondo) de forma segura y controlada?",
+          options: [
+            "1) Mantener rumbo con viento por una aleta, 2) cazar la escota de mayor al centro, 3) derivar cruzando la popa y filar la escota del otro lado.",
+            "1) Soltar la escota por completo, 2) acelerar a fondo a motor y 3) meter timón a la vía.",
+            "1) Orzar proa al viento, 2) arriar la mayor y 3) cambiar el foque de banda.",
+            "1) Fondear el ancla de capa, 2) soltar la caña y 3) trabar la botavara."
+          ],
+          correct: 0,
+          exp: "Cazar la mayor al medio antes de trasluchar evita el cruce violento de la botavara de una banda a otra, protegiendo a la tripulación y evitando la rotura del aparejo y obenques."
+        },
+        {
+          q: "¿Qué significa 'capear' un temporal a vela y qué es 'capear a palo seco'?",
+          options: [
+            "Capear es mantener el barco estable con poco avance (mayor reducida cazada y vela de proa acuartelada); a palo seco es capear con todas las velas arriadas.",
+            "Capear es correr a favor de las olas a 15 nudos; a palo seco es navegar con el motor auxiliar encendido.",
+            "Capear es fondear a 100 metros de profundidad; a palo seco es varar voluntariamente en la arena.",
+            "Ambas son maniobras prohibidas por la Prefectura Naval en lagos y ríos."
+          ],
+          correct: 0,
+          exp: "Capear pone las velas en oposición (foque acuartelado y mayor cazada) con timón a orzar para amortiguar el temporal. Si el viento es extremo y destruye el paño, se arria todo quedando 'a palo seco'."
+        },
+        {
+          q: "¿Qué son los 'andariveles' en cubierta y cuándo es indispensable su utilización?",
+          options: [
+            "Cables o cintas de acero/poliéster tendidos longitudinalmente en cubierta para hacer firme el gancho del arnés de seguridad de la tripulación en mal tiempo.",
+            "Cabos para sostener las defensas en los costados durante el atraque.",
+            "Peldaños de madera colocados en el mástil para subir a la cruceta.",
+            "Cabos elásticos para sujetar los remos del chinchorro auxiliar."
+          ],
+          correct: 0,
+          exp: "Los andariveles corren desde proa hasta la bañera. Con mal tiempo o de noche, todo tripulante que sube a cubierta engancha su línea de vida del arnés al andarivel para no caer al mar."
+        },
+        {
+          q: "Al rescatar a una persona que cayó a aguas frías y presenta síntomas de hipotermia, ¿cuál es el procedimiento correcto?",
+          options: [
+            "Retirar la ropa mojada, abrigar con mantas secas protegiendo del viento, dar bebidas templadas si está consciente y no masajear con violencia.",
+            "Darle de beber abundante alcohol caliente y sumergirla de golpe en un baño hirviendo.",
+            "Hacerla correr intensamente por cubierta para que entre en calor por fricción muscular.",
+            "Aplicarle compresas de hielo en la cabeza y dejar la ropa mojada puesta."
+          ],
+          correct: 0,
+          exp: "Hipotermia = enfriamiento corporal profundo. Se debe recalentar pasivamente (aislar del frío, ropa seca, mantas). El alcohol está contraindicado porque dilata vasos periféricos agravando el shock."
         }
       ],
       u2_2: [
         {
-          q: "En condiciones normales con fondeo mixto (cadena y cabo), ¿cuánto fondeo se debe soltar (filar)?",
+          q: "¿Cuánto cabo o cadena se debe filar (soltar) al fondear con buen tiempo y con mal tiempo?",
           options: [
-            "Entre 3 y 5 veces la profundidad del lugar (y de 7 a 10 veces en caso de mal tiempo).",
-            "Exactamente la misma medida que la profundidad (1 vez la sonda).",
-            "Una longitud fija de 15 metros sin importar la profundidad ni el viento.",
-            "El doble de la manga del barco medida de babor a estribor."
+            "Solo cadena: 3 veces la profundidad (buen tiempo) y 5 veces (mal tiempo). Cabo con tramo de cadena: 5 veces (buen tiempo) y 7 a 10 veces (mal tiempo).",
+            "Exactamente 1 vez la profundidad en todo momento sin importar el viento.",
+            "Una longitud fija de 10 metros para cualquier profundidad.",
+            "El doble de la eslora del velero medida desde la roda al espejo.",
+        {
+          q: "Un buque remolcador arrastra a otra embarcación y la longitud del remolque (desde la popa del remolcador hasta la popa del remolcado) SUPERA los 200 metros. ¿Qué luces de noche y marcas de día debe exhibir?",
+          options: [
+            "De noche: 3 luces blancas de tope a proa en vertical + luz de remolque amarilla (135°) sobre la de alcance. De día: una marca bicónica en forma de rombo negro en ambos buques.",
+            "De noche: 2 luces de tope blancas + luz roja todo horizonte. De día: dos esferas negras en el remolcador.",
+            "De noche: 1 luz de tope blanca + una luz verde destellante. De día: una bandera cuadrada azul.",
+            "De noche: luces de buque fondeado. De día: dos conos unidos por la base."
           ],
           correct: 0,
-          exp: "Filar de 3 a 5 veces la sonda permite que el tiro del ancla sea horizontal sobre el fondo para que las uñas claven bien. Con poco cabo el ancla tira hacia arriba y garrea."
+          exp: "RIPA Regla 24: Remolque menor a 200 m lleva 2 luces de tope en vertical. Remolque MAYOR a 200 m lleva 3 luces de tope blancas verticales y luz de remolque amarilla (135°). De día, tanto el remolcador como el remolcado exhiben una marca bicónica (rombo negro)."
         },
         {
-          q: "¿Por qué está TERMINANTEMENTE PROHIBIDO usar cabos de polipropileno para fondear?",
+          q: "¿Qué luces y marcas obligatorias debe exhibir una embarcación de más de 50 metros de eslora que se encuentra fondeada?",
           options: [
-            "Porque es un material flotante que permanece en superficie y se enreda en la hélice o el timón.",
-            "Porque es demasiado pesado y hunde la proa de la embarcación.",
-            "Porque se disuelve rápidamente al entrar en contacto con el agua dulce.",
-            "Porque no resiste la humedad ambiental de la noche."
+            "De noche: una luz blanca todo horizonte a proa y otra similar a popa y más baja. De día: una esfera (bola) negra a proa (si supera 100 m, debe encender además las luces de trabajo en cubierta).",
+            "De noche: dos luces rojas verticales fijas; de día: un cono negro hacia abajo.",
+            "De noche: una sola luz blanca en el tope del mástil; de día: dos rombos negros en la cruceta.",
+            "De noche: únicamente las luces de costado verde y roja; de día: la bandera de fondeo."
           ],
           correct: 0,
-          exp: "El polipropileno flota en el agua; por eso queda flotando en superficie con enorme peligro de engancharse en la hélice o timón. Se debe usar nylon (elástico) o dacron."
+          exp: "RIPA Regla 30: Un buque fondeado de 50 m o más lleva dos luces blancas todo horizonte (proa más alta, popa más baja). Si supera 100 m de eslora, es obligatorio iluminar las cubiertas con las luces de trabajo. De día exhibe una bola negra a proa."
         },
         {
-          q: "¿Qué significa que el ancla está 'garreando'?",
+          q: "En una maniobra de remolque por empuje en la que el remolcador y el buque empujado están unidos rígidamente en una unidad combinada, ¿cómo se consideran a efectos de las luces de navegación?",
           options: [
-            "Que no logra morder ni afirmarse en el fondo y se arrastra, dejando al barco a la deriva.",
-            "Que quedó fuertemente trabada entre piedras en el lecho del río.",
-            "Que la cadena se enrolló alrededor del mástil principal.",
-            "Que el ancla llegó al fondo a más de 30 metros de profundidad."
+            "Se consideran como un solo buque de propulsión mecánica y exhiben las luces correspondientes a su eslora total.",
+            "El empujador exhibe tres luces rojas verticales y el empujado dos luces amarillas intermitentes.",
+            "Cada embarcación debe apagar sus luces y encender únicamente faros buscahuellas de proa.",
+            "El remolcador exhibe luces de fondeo y el empujado luces de vela."
           ],
           correct: 0,
-          exp: "Garrear ocurre cuando el ancla araña o resbala sobre el fondo sin afirmarse, perdiendo el fondeo y derivando por acción del viento o la corriente."
+          exp: "RIPA Regla 24(b): Cuando un buque que empuja y un buque empujado hacia adelante estén unidos rígidamente en una unidad combinada, se considerarán como un solo buque de propulsión mecánica y exhibirán las luces reglamentarias de dicha categoría."
+        }
+          ],
+          correct: 0,
+          exp: "Filar longitud suficiente permite formar la 'catenaria' (curva por peso del fondeo), logrando que la tracción sobre el ancla sea horizontal y paralela al fondo para clavar las uñas."
+        },
+        {
+          q: "¿Por qué está terminantemente desaconsejado utilizar cabos de polipropileno para fondear una embarcación?",
+          options: [
+            "Porque el polipropileno flota en el agua y queda en superficie, con grave peligro de enredarse en la hélice, timón o quillote.",
+            "Porque es un material metálico pesado que desestabiliza la proa.",
+            "Porque se disuelve inmediatamente con la salinidad del agua de mar.",
+            "Porque carece de resistencia para atar cabos a las cornamusas."
+          ],
+          correct: 0,
+          exp: "El polipropileno flota en el agua; por lo tanto, no se hunde para formar catenaria y queda flotando en superficie, enredándose inevitablemente en la propia hélice o timón."
+        },
+        {
+          q: "¿Qué significa que el ancla está 'garreando' y cómo se detecta a bordo?",
+          options: [
+            "Significa que el ancla resbala y araña el fondo sin clavarse; se detecta por vibraciones en la línea de fondeo y al observar que las enfilaciones en la costa cambian.",
+            "Significa que el ancla tocó fondo de piedra y quedó soldada a una roca.",
+            "Significa que la cadena se enroscó en la caña del timón a popa.",
+            "Significa que la profundidad del agua ha aumentado más de diez metros."
+          ],
+          correct: 0,
+          exp: "Garrear es arrastrar el ancla sin que muerda el fondo. Se verifica observando dos puntos de la costa enfilados: si la enfilación se abre o cambia, el barco está derivando."
+        },
+        {
+          q: "¿Cuáles son los tipos de anclas más utilizadas en la navegación deportiva de río y mar?",
+          options: [
+            "Danforth (planchas articuladas), C.Q.R. o arado, Bruce y Almirantazgo.",
+            "Anclas de plomo cilíndrico, anclas de cemento armado y mosquetones de acero.",
+            "Ganchos de alambre galvanizado y anclas de madera terciada.",
+            "Únicamente anclas de hélice marina giratoria."
+          ],
+          correct: 0,
+          exp: "Danforth es la reina de arena y fango en el Río de la Plata. La C.Q.R. (arado) y Bruce ofrecen gran poder de agarre en diversos fondos y en cambios de viento por borneo."
+        },
+        {
+          q: "¿Qué es un 'orinque' y cuál es su utilidad al fondear en zonas de fondos dudosos o rocosos?",
+          options: [
+            "Es un cabo fino con un boyarín atado a la cruz del ancla que indica su posición y permite desengancharla tirando en sentido contrario si se enroca.",
+            "Es un gancho automático para izar el ancla con el molinete eléctrico.",
+            "Es un tapón de goma estanco para cerrar el tubo del escobén.",
+            "Es un fusible mecánico que corta la cadena si la corriente es fuerte."
+          ],
+          correct: 0,
+          exp: "El orinque se afirma en la cruz o diamante del ancla. Si el ancla queda trabada bajo una roca o cadena vieja, tirando del orinque hacia arriba se zafa fácilmente."
+        },
+        {
+          q: "Si la embarcación ha quedado varada en un banco de arena y no logra zafar con el motor, ¿conviene o no fondear de inmediato?",
+          options: [
+            "Sí, conviene fondear de inmediato hacia aguas profundas para evitar que el oleaje o viento empujen el barco más adentro del banco.",
+            "No, está prohibido fondear cuando el barco está apoyado sobre el fondo.",
+            "Solo se fondea si la tripulación decide abandonar el barco en el chinchorro.",
+            "Se debe vaciar el tanque de combustible al río antes de fondear."
+          ],
+          correct: 0,
+          exp: "Ante una varadura, se debe tirar un ancla por popa o hacia el agua honda. Esto evita que el barco sea arrastrado hacia zonas más secas y permite virar con el molinete cuando suba la marea."
+        },
+        {
+          q: "¿En qué situación de navegación se utiliza reglamentariamente el remolque 'por largo'?",
+          options: [
+            "Para remolcar a otra embarcación en trayectos prolongados en mar abierto o aguas libres con espacio de maniobra.",
+            "Para maniobrar dentro de dársenas muy estrechas y atracar al muelle.",
+            "Para mover lanchas deportivas averiadas dentro de una marina de amarras.",
+            "Únicamente cuando ambas embarcaciones van sin tripulación a bordo."
+          ],
+          correct: 0,
+          exp: "El remolque por largo (cabo largo con catenaria para absorber tirones del oleaje) es el indicado en mar abierto. En puertos o canales estrechos se remolca abarloado o corto."
+        },
+        {
+          q: "Al aproximarse a un muelle a motor para atracar, ¿cómo conviene orientar la entrada respecto a la corriente o viento predominante?",
+          options: [
+            "Entrar navegando CONTRA la corriente o viento, porque permite conservar gobierno efectivo a mínima velocidad de avance.",
+            "Entrar A FAVOR de la corriente a máxima velocidad para no perder gobierno.",
+            "Entrar perpendicular de proa a 90 grados sin frenar la arrancada.",
+            "Apagar el motor 100 metros antes y entrar impulsado por la corriente de popa."
+          ],
+          correct: 0,
+          exp: "Atracar contra la corriente o viento: el agua sigue fluyendo sobre la pala del timón dando gobierno total mientras la velocidad relativa respecto al muelle es casi nula y segura."
         }
       ],
       u2_3: [
         {
-          q: "¿Por qué el 'As de Guía' es considerado el nudo rey de la navegación?",
+          q: "¿Por qué el 'As de Guía' es considerado el nudo marinero más importante y versátil a bordo?",
           options: [
-            "Porque forma una gaza (lazo) fija que no se corre ni se azoca (aprieta) bajo tensión, y se desata con facilidad.",
-            "Porque es el único nudo que se suelta solo al mojarse con agua de río.",
-            "Porque sirve exclusivamente para unir cabos de diferente grosor.",
-            "Porque se aprieta permanentemente y jamás vuelve a desatarse."
+            "Porque forma una gaza (lazo) firme que jamás se corre ni se azoca (aprieta) bajo carga pesada, y se deshace con facilidad tras trabajar.",
+            "Porque es el único nudo que puede deshacerse solo al mojarse con agua salada.",
+            "Porque sirve exclusivamente para unir cabos de diferente grosor y material.",
+            "Porque se fusiona con el calor impidiendo que el cabo vuelva a desatarse."
           ],
           correct: 0,
-          exp: "El As de Guía es el nudo marinero por excelencia: no resbala bajo cargas pesadas, no se traba y se desata fácilmente después de soportar gran tensión."
+          exp: "El As de Guía soporta enormes esfuerzos sin deslizarse ni deformarse, no se aprieta al punto de trabarse y puede desatarse a mano inmediatamente al aflojar la tensión."
         },
         {
-          q: "¿Para qué se utiliza el nudo 'Ballestrinque' y qué precaución esencial exige?",
+          q: "¿Para qué se utiliza comúnmente el nudo 'Ballestrinque' y qué precaución de seguridad exige?",
           options: [
-            "Para colgar defensas a los candeleros; debe asegurarse con un medio cote porque puede aflojarse si la tensión fluctúa.",
-            "Para unir dos cabos de fondeo cortados en emergencia.",
-            "Para afirmar el ancla al molinete sin necesidad de cadena.",
-            "Para izar al tripulante al tope del mástil con el arnés."
+            "Para colgar defensas a los candeleros o amarrar a un poste cilíndrico; exige rematar con un medio cote porque puede zafar si la tensión fluctúa.",
+            "Para afirmar la driza al puño de driza en velas de regata extrema.",
+            "Para unir dos cadenas de acero de fondeo sin grillete.",
+            "Para confeccionar la gaza del salvavidas circular de rescate."
           ],
           correct: 0,
-          exp: "El Ballestrinque es ideal para colgar defensas, pero con tirones variables puede soltarse; por eso siempre se le añade un medio cote de remate."
+          exp: "El Ballestrinque muerde por fricción en tubos o postes; si la defensa baila sin tensión constante puede aflojarse, por lo que siempre se asegura con un medio cote de remate."
         },
         {
-          q: "¿Cuál es la regla de oro de seguridad al afirmar un cabo bajo tensión en una cornamusa?",
+          q: "¿Cómo se denomina al extremo libre de un cabo náutico que se utiliza para tejer un nudo o afirmarlo a bordo?",
           options: [
-            "El cabo que hace fuerza (tensión) debe entrar por la base de la cornamusa; los ochos y la trinca van arriba.",
-            "La trinca debe ir colocada abajo apretada contra la madera de cubierta.",
-            "Se deben realizar diez vueltas redondas consecutivas sin hacer ochos.",
-            "El cabo debe cortarse al ras para que no estorbe el paso en cubierta."
+            "Chicote.",
+            "Firme.",
+            "Seno.",
+            "Gaza."
           ],
           correct: 0,
-          exp: "¡Cabo de fuerza siempre abajo! Si colocas la trinca por debajo del cabo que tira con fuerza, quedará mordida y no podrás soltar el amarre sin cortar el cabo."
+          exp: "Chicote: extremo libre del cabo. Firme: tramo largo principal que soporta la carga o tensión. Seno: la curvatura o arco en 'U' que forma el cabo."
+        },
+        {
+          q: "¿Cuál es la función del 'Nudo Llano' (o nudo de rizo) y en qué casos está contraindicado?",
+          options: [
+            "Sirve para unir dos cabos de igual grosor y atar matafiones de rizos; está contraindicado para unir cabos sometidos a gran tracción de seguridad porque puede volcarse.",
+            "Sirve para formar gazas permanentes en cables de acero de obenques.",
+            "Sirve para remolcar buques petroleros en alta mar con oleaje severo.",
+            "Sirve exclusivamente para colgar las llaves de la cabina en el mamparo."
+          ],
+          correct: 0,
+          exp: "El nudo llano (derecha sobre izquierda y luego izquierda sobre derecha) es plano y une cabos de igual mena. Bajo grandes cargas variables puede volcarse o desatarse, por lo que no es un nudo de vida o muerte."
+        },
+        {
+          q: "¿Cuál es la función elemental del nudo 'Ocho' (o lasca) en la cabullería de un velero?",
+          options: [
+            "Actuar como nudo de tope en los chicotes de escotas y drizas para evitar que se escapen por los motones o pasacables.",
+            "Unir dos cabos mojados de diferente diámetro.",
+            "Hacer firme el cabo de remolque a la cornamusa de popa.",
+            "Aumentar la elasticidad del cabo de fondeo ante tirones bruscos."
+          ],
+          correct: 0,
+          exp: "El nudo en ocho es el tope por excelencia: abulta lo suficiente para no pasar por una polea o motón y no deteriora las fibras del cabo al desatarlo."
+        },
+        {
+          q: "¿Cuál es la técnica marinera correcta para amarrar un cabo con tensión sobre una cornamusa de cubierta?",
+          options: [
+            "Vuelta redonda inicial entrando por la base alejada, cruces sucesivos en forma de 'ocho' y trinca superior con media vuelta mordida.",
+            "Diez vueltas redondas alrededor de la base sin cruzar ningún ocho.",
+            "Hacer un nudo as de guía alrededor de uno solo de los brazos de la cornamusa.",
+            "Atar un nudo ciego apretado con una pinza de presión."
+          ],
+          correct: 0,
+          exp: "El cabo que hace fuerza entra por la base y abraza la cornamusa; luego se cruza en ochos y se remata con una vuelta mordida arriba. Así nunca se traba bajo carga."
+        },
+        {
+          q: "Abarloado al muelle, ¿qué movimientos controlan respectivamente los 'Largos', los 'Travesines' y los 'Springs'?",
+          options: [
+            "Largos: evitan desplazamiento longitudinal hacia adelante/atrás; Travesines: pegan el barco al muelle; Springs: diagonales que limitan avances y retrocesos.",
+            "Largos: levantan el mástil; Travesines: controlan las velas; Springs: regulan el ancla de proa.",
+            "Todos cumplen exactamente la misma función y se colocan paralelos entre sí.",
+            "Los travesines son para alta mar y los springs únicamente para lagunas cerradas."
+          ],
+          correct: 0,
+          exp: "Largos de proa/popa van hacia afuera limitando el recorrido; travesines tiran en perpendicular evitando que el barco se despegue; springs cruzan en diagonal frenando movimientos longitudinales."
+        },
+        {
+          q: "¿Qué significa 'adujar' un cabo y por qué es una norma de seguridad esencial a bordo?",
+          options: [
+            "Recogerlo y ordenarlo en vueltas prolijas sin nudos ni torsiones para que corra libremente sin engalletarse al momento de la maniobra.",
+            "Cortarle los chicotes deshilachados con una navaja caliente.",
+            "Sumergirlo en aceite lubricante para impermeabilizar las fibras.",
+            "Tensionarlo con el winche hasta que pierda su elasticidad natural."
+          ],
+          correct: 0,
+          exp: "Adujar es plegar el cabo ordenadamente. Un cabo enredado en cubierta ('engalletado') puede trabar una escota, impedir arriar una vela en emergencia o atrapar la pierna de un tripulante."
         }
       ],
       u3_1: [
         {
-          q: "¿Cuál es la diferencia fundamental en el encendido entre un motor Diésel y uno de Nafta?",
+          q: "¿Cuál es la diferencia técnica fundamental en el principio de encendido entre un motor Diésel y uno de Nafta?",
           options: [
-            "El Diésel comprime solo aire y enciende por calor al inyectar gasoil (sin bujías); el de nafta necesita la chispa de una bujía.",
-            "El Diésel utiliza cuatro bujías de alto voltaje y el de nafta ninguna.",
-            "El motor de nafta carece de pistones y bielas en su interior.",
-            "El Diésel no necesita combustible para mantenerse encendido."
+            "El Diésel comprime aire puro a muy alta temperatura y enciende por autoinflamación al inyectar gasoil (sin bujía); el de nafta necesita la chispa de una bujía.",
+            "El Diésel utiliza seis bujías de platino y el de nafta comprime agua con aceite.",
+            "El motor de nafta no tiene pistones ni bielas móviles.",
+            "El Diésel funciona únicamente con aire sin consumir combustible."
           ],
           correct: 0,
-          exp: "En el motor Diésel, el aire se comprime a gran presión alcanzando más de 700°C; al inyectar gasoil pulverizado se autoinflama sin necesidad de bujías."
+          exp: "El Diésel comprime aire puro a presiones superiores a 20:1 alcanzando más de 600°C. Al pulverizar gasoil por los inyectores, este se inflama espontáneamente sin bujías."
         },
         {
-          q: "¿Por qué el combustible Diésel (gasoil) es mucho más seguro a bordo que la nafta?",
+          q: "¿Por qué el combustible Diésel (gasoil) es mucho más seguro en la náutica que la nafta?",
           options: [
-            "Porque el gasoil no emite vapores explosivos a temperatura ambiente que se acumulen peligrosamente en la sentina.",
-            "Porque el gasoil se evapora en menos de tres segundos al contacto con el aire.",
-            "Porque el gasoil apaga automáticamente cualquier llama de fuego.",
-            "Porque el gasoil no ensucia los filtros de combustible."
+            "Porque el gasoil no desprende vapores explosivos volátiles a temperatura ambiente que se depositen peligrosamente en el fondo de la sentina.",
+            "Porque el gasoil se disuelve en agua dulce sin dejar rastros oleosos.",
+            "Porque el gasoil no se quema aunque se le aplique una llama directa.",
+            "Porque los tanques de gasoil no necesitan respiraderos al exterior."
           ],
           correct: 0,
-          exp: "Los vapores de nafta son más pesados que el aire y caen a la sentina, donde cualquier chispa puede provocar una explosión. El gasoil tiene un punto de inflamación muy superior (>55°C)."
+          exp: "Los vapores de nafta son más pesados que el aire, caen a la sentina y una chispa eléctrica los detona. El gasoil tiene un punto de inflamación muy superior (>55°C), haciéndolo infinitamente más seguro a bordo."
         },
         {
-          q: "En un motor marino Diésel de 4 tiempos, ¿qué ingresa al cilindro durante la carrera de admisión?",
+          q: "¿Cuál es el orden secuencial exacto de los 4 ciclos o tiempos de un motor marino convencional?",
           options: [
-            "Únicamente aire atmosférico limpio y filtrado.",
-            "Una mezcla de gasoil pulverizado y nafta de dos tiempos.",
-            "Gasoil puro inyectado a máxima presión.",
-            "Gases quemados del escape con vapor de agua."
+            "1° Admisión — 2° Compresión — 3° Expansión (o Explosión/Combustión) — 4° Escape.",
+            "1° Admisión — 2° Aspiración — 3° Expansión — 4° Escape.",
+            "1° Explosión — 2° Compresión — 3° Expansión — 4° Escape.",
+            "1° Compresión — 2° Admisión — 3° Escape — 4° Descompresión."
           ],
           correct: 0,
-          exp: "En el tiempo de admisión del Diésel, el pistón desciende aspirando únicamente aire puro. El combustible se inyecta recién al finalizar la compresión."
+          exp: "Los cuatro tiempos del ciclo Otto/Diésel son: 1) Admisión (baja el pistón), 2) Compresión (sube con válvulas cerradas), 3) Expansión/Carrera de fuerza, y 4) Escape (sube barriendo gases quemados)."
+        },
+        {
+          q: "En un motor de cuatro tiempos, ¿cómo se encuentran las válvulas de admisión y escape en el momento exacto en que salta la chispa o se inyecta el combustible?",
+          options: [
+            "Ambas válvulas se encuentran completamente CERRADAS.",
+            "La de admisión abierta y la de escape cerrada.",
+            "La de escape abierta y la de admisión cerrada.",
+            "Ambas válvulas se encuentran totalmente abiertas."
+          ],
+          correct: 0,
+          exp: "Para contener la enorme presión generada por la combustión y transmitir toda la fuerza expansiva a la cabeza del pistón, ambas válvulas deben estar herméticamente cerradas."
+        },
+        {
+          q: "¿Qué combustible consumen tradicionalmente los motores fuera de borda de 2 tiempos carburados?",
+          options: [
+            "Mezcla de nafta con aceite lubricante especial para dos tiempos (en proporciones como 50:1 o 100:1).",
+            "Gasoil puro con aditivos anticongelantes.",
+            "Nafta súper pura sin ningún tipo de adición aceitosa.",
+            "Alcohol desnaturalizado con agua destilada."
+          ],
+          correct: 0,
+          exp: "Al carecer de cárter de aceite y bomba de lubricación, los motores 2T tradicionales lubrican el cigüeñal y cilindros mediante el aceite mezclado directamente en la nafta."
+        },
+        {
+          q: "¿Qué normas de seguridad obligatorias deben cumplirse estrictamente durante la carga de combustible en el barco?",
+          options: [
+            "Motor apagado, prohibido fumar o encender llamas, cortar artefactos eléctricos, no derramar y ventilar la sentina antes de arrancar.",
+            "Mantener el motor en marcha en neutro para verificar que no falle la bomba.",
+            "Tener todas las luces de cabina encendidas para iluminar el piso de sentina.",
+            "Llenar los tanques hasta que el combustible rebalse por la borda al río."
+          ],
+          correct: 0,
+          exp: "La carga de combustible es un momento crítico: cualquier vapor acumulado o chispa de un extractor/batería provoca incendios o explosión. Se debe ventilar bien la sentina antes de dar arranque."
+        },
+        {
+          q: "¿Cuál es la forma de casco más apta para lanchas a motor y embarcaciones de planeo rápido?",
+          options: [
+            "Casco en 'V' (fondo en V profunda o moderada con deflectores).",
+            "Casco de desplazamiento totalmente redondo.",
+            "Casco plano sin quilla ni aristas.",
+            "Casco cilíndrico sumergido."
+          ],
+          correct: 0,
+          exp: "El fondo en 'V' corta el oleaje suavemente a gran velocidad evitando golpes secos en el casco (pantoque) y provee estabilidad de rumbo durante el planeo."
+        },
+        {
+          q: "¿A qué velocidad debe ingresar reglamentariamente una embarcación a motor en un puerto, canal balizado o zona de fondeo?",
+          options: [
+            "A mínima velocidad de gobierno compatible con la maniobra, sin generar olas perjudiciales para terceros.",
+            "A máxima velocidad de planeo para desocupar rápido la boca del puerto.",
+            "A velocidad de crucero con el trim de proa totalmente levantado.",
+            "A 20 nudos constantes independientemente del tráfico local."
+          ],
+          correct: 0,
+          exp: "En puertos y marinas se navega a velocidad de gobierno (la mínima que permite timonear). El oleaje producido puede desamarrar barcos, causar roturas o lesionar tripulaciones amarradas."
         }
       ],
       u3_2: [
         {
-          q: "¿Qué función cumple el filtro decantador con vaso de vidrio en la línea de combustible diésel?",
+          q: "¿Cuál es la función vital del filtro decantador con vaso de vidrio en la línea de combustible diésel?",
           options: [
-            "Separar el agua presente en el gasoil para evitar que pase a la bomba inyectora y arruine los inyectores.",
-            "Aumentar la potencia del motor mejorando el octanaje del gasoil.",
-            "Filtrar las partículas de aceite que salen del cárter del motor.",
-            "Medir con exactitud cuántos litros de combustible quedan en el tanque."
+            "Separar el agua presente en el gasoil por diferencia de densidad antes de que llegue a la bomba inyectora y arruine los inyectores.",
+            "Aumentar el octanaje del combustible para obtener mayor velocidad de planeo.",
+            "Filtrar los restos de aceite de transmisión que escapan de la pata del motor.",
+            "Medir con precisión digital el caudal de consumo horario de gasoil."
           ],
           correct: 0,
-          exp: "El agua es más pesada que el gasoil y se deposita en el fondo del vaso de vidrio. Si el agua llega a los inyectores, los arruina por corrosión inmediata."
+          exp: "El agua es más pesada que el gasoil y decanta en el fondo del vaso transparente. Si pasa a la bomba inyectora y toberas, el agua oxida y destruye las piezas micrométricas al instante."
         },
         {
-          q: "Si entra aire en las cañerías de combustible de un motor diésel, ¿qué sucede y cómo se resuelve?",
+          q: "Si ingresa aire en las cañerías de combustible de un motor diésel, ¿qué ocurre y cuál es el procedimiento para solucionarlo?",
           options: [
-            "El motor se para y no arranca; hay que 'purgar' el circuito aflojando los purgadores y bombeando a mano.",
-            "El motor se acelera al máximo y se detiene cortando el cable de la batería.",
-            "El motor funciona con normalidad pero consume más aceite de caja.",
-            "Se resuelve simplemente acelerando a fondo con la llave de contacto puesta."
+            "El motor se detiene o no arranca; es necesario 'purgar' el circuito aflojando purgadores y accionando la bomba manual hasta eliminar burbujas.",
+            "El motor aumenta bruscamente de revoluciones y se soluciona acelerando a fondo.",
+            "No ocurre nada porque los inyectores expulsan el aire automáticamente por el caño de escape.",
+            "Se soluciona vaciando todo el tanque de combustible y reemplazándolo por nafta."
           ],
           correct: 0,
-          exp: "El sistema de inyección diésel no tolera burbujas de aire. Si entra aire, el motor se detiene y es indispensable purgarlo con la bomba manual hasta que salga gasoil limpio."
+          exp: "El aire es compresible y amortigua la presión requerida para abrir los inyectores (>150 bar). Para que arranque, se debe purgar el circuito bombeando a mano hasta que solo salga gasoil puro."
         },
         {
-          q: "¿Por qué se recomienda dejar los tanques de combustible llenos cuando el barco queda amarrado por varias semanas?",
+          q: "¿Por qué se recomienda dejar los tanques de combustible llenos cuando la embarcación va a quedar amarrada por períodos prolongados?",
           options: [
-            "Para evitar que el aire húmedo interior condense agua en las paredes del tanque por los cambios de temperatura día/noche.",
-            "Para que el barco quede más pesado y no se balancee en la amarra.",
-            "Para evitar que el gasoil pierda color por la luz solar.",
-            "Para impedir que los inyectores se queden sin corriente eléctrica."
+            "Para evitar que el aire húmedo interior condense gotas de agua sobre las paredes metálicas del tanque ante los cambios térmicos día/noche.",
+            "Para que el barco quede más pesado en el agua y resista mejor el oleaje del muelle.",
+            "Para impedir que el combustible se congele por la acción del viento patagónico.",
+            "Para evitar que las baterías de a bordo se descarguen con rapidez."
           ],
           correct: 0,
-          exp: "El espacio libre de un tanque semivacío se llena de aire húmedo que se condensa en gotas de agua sobre las paredes frías. Con el tanque lleno se elimina el aire y se evita el agua en el gasoil."
+          exp: "Un tanque semivacío contiene un gran volumen de aire que, con los cambios diarios de temperatura, condensa humedad en sus paredes formando agua en el fondo del tanque."
+        },
+        {
+          q: "¿Hacia qué lado gira una hélice 'dextrógira' en marcha avante vista desde popa mirando hacia proa?",
+          options: [
+            "En el sentido de las agujas del reloj (sentido horario / hacia la derecha).",
+            "En sentido antihorario (hacia la izquierda).",
+            "Gira en ambos sentidos en forma alternada.",
+            "No gira; funciona por empuje magnético axial."
+          ],
+          correct: 0,
+          exp: "Hélice dextrógira: en marcha avante gira a la derecha (sentido horario visto de popa). Hélice levógira: gira a la izquierda (sentido antihorario)."
+        },
+        {
+          q: "¿Qué es el 'efecto de rabeo' de la hélice y cómo afecta la maniobra de marcha atrás en una hélice dextrógira?",
+          options: [
+            "Es el empuje lateral que ejerce la pala inferior de la hélice, haciendo que la popa caiga hacia babor al dar marcha atrás.",
+            "Es la vibración del eje producida por flexión del timón de popa.",
+            "Es el desprendimiento de burbujas de vapor sobre las palas de la hélice.",
+            "Es la tendencia del barco a elevar la proa al superar los diez nudos."
+          ],
+          correct: 0,
+          exp: "Al dar atrás con hélice dextrógira, la hélice gira en sentido antihorario y la pala inferior muerde agua más densa empujando la popa lateralmente hacia babor (y la proa cae a estribor)."
+        },
+        {
+          q: "¿Cómo debe dejarse la llave de paso de combustible y las garrafas de gas al desembarcar y abandonar el barco en amarra?",
+          options: [
+            "Paso de nafta/gasoil CERRADO y garrafas de gas CERRADAS con llave general de corte.",
+            "Paso de combustible abierto para mantener presurizado el carburador.",
+            "Garrafas abiertas para evitar acumulación de presión en la manguera.",
+            "Es indistinto; los sistemas marinos modernos no necesitan supervisión."
+          ],
+          correct: 0,
+          exp: "Dejar pasos abiertos ante una pequeña fuga en mangueras o punzués del carburador llena la sentina de combustible o gas, con altísimo riesgo de incendio o explosión en la marina."
+        },
+        {
+          q: "Al prepararse para zarpar de una amarra o muelle, ¿qué se debe hacer primero: largar las amarras o arrancar el motor?",
+          options: [
+            "Arrancar el motor, verificar su correcta refrigeración y gobierno, y recién después largar las amarras.",
+            "Largar todas las amarras y empujar el barco al canal antes de intentar dar arranque.",
+            "Soltar los cabos de popa, encender la radio VHF y dejar el motor apagado.",
+            "Remolcar el barco a remo hacia aguas abiertas antes de accionar la llave."
+          ],
+          correct: 0,
+          exp: "¡Regla elemental de buen marino! Jamás largues amarras sin tener el motor en marcha y comprobado. Si el motor falla o no arranca con el barco suelto, quedarás a la deriva contra otros barcos."
         }
       ],
       u3_3: [
         {
-          q: "Inmediatamente después de arrancar el motor marino, ¿qué control visual es OBLIGATORIO en los primeros segundos?",
+          q: "Inmediatamente después de arrancar el motor marino, ¿qué verificación visual es OBLIGATORIA en los primeros 10 a 15 segundos?",
           options: [
-            "Verificar que salga agua de refrigeración mezclada con los gases por el caño de escape exterior.",
-            "Comprobar que el tacómetro marque más de 4.000 revoluciones por minuto.",
-            "Revisar que la luz de tope esté encendida a plena potencia.",
-            "Verificar que la caña del timón esté atada a la banda de estribor."
+            "Comprobar que salga un caudal continuo de agua de refrigeración mezclada con los gases de escape por la popa o costado.",
+            "Verificar que el voltímetro marque exactamente 220 voltios de corriente alterna.",
+            "Acelerar a 4.000 RPM en punto muerto para expulsar el exceso de aceite.",
+            "Observar que el nivel de combustible suba en el indicador de nivel."
           ],
           correct: 0,
-          exp: "Si en 10 a 15 segundos no sale agua de refrigeración por el escape exterior, el motor no está chupando agua (o la toma de fondo está cerrada) y recalentará rápidamente."
+          exp: "Si no sale agua por el escape en 15 segundos, la toma de agua está cerrada, el circuito tiene aire o el rotor de la bomba está roto; si no se apaga inmediatamente, el motor se fundirá."
         },
         {
-          q: "¿Qué cuidado crítico exige el rodete flexible de goma (impeller) de la bomba de agua de mar?",
+          q: "¿Por qué el rotor flexible de goma (impeller) de la bomba de agua de mar jamás debe girar en seco?",
           options: [
-            "Jamás debe girar en seco sin agua, ya que la fricción destruye las paletas de goma en pocos segundos.",
-            "Debe lubricarse con nafta todos los meses para ablandar el caucho.",
-            "Debe cambiarse únicamente cada diez años de uso continuo.",
-            "Se debe pintar de color negro para protegerlo del salitre."
+            "Porque la goma se refrigera y lubrica con el agua; sin agua, la fricción genera calor extremo que quema y desintegra las paletas en segundos.",
+            "Porque el aire atmosférico oxida los engranajes de bronce de la carcasa.",
+            "Porque el motor se acelera fuera de control por falta de resistencia.",
+            "Porque el impeller absorbe aire y revienta el silenciador del escape."
           ],
           correct: 0,
-          exp: "El impeller de goma se lubrica y enfría con la propia agua bombeada. Si gira en seco (por ejemplo arrancar fuera del agua sin manguera), se quema y desintegra de inmediato."
+          exp: "Las paletas de neopreno del impeller necesitan el flujo de agua para resbalar en la cámara excéntrica. Girando en seco se derriten y los pedazos de goma tapan los conductos internos del motor."
         },
         {
-          q: "¿Cuál es el procedimiento correcto para apagar el motor luego de una navegación exigida a régimen?",
+          q: "¿En qué posición debe estar la esclusa o grifo de fondo de la toma de agua salada mientras el motor está funcionando?",
           options: [
-            "Dejarlo moderar en neutro de 3 a 5 minutos para estabilizar temperaturas y recién entonces apagarlo.",
-            "Acelerar a fondo en neutro y cortar el contacto de inmediato.",
-            "Cerrar la toma de fondo de agua antes de detener el motor.",
-            "Poner marcha atrás brusca para que el volante del motor se frene por inercia."
+            "Completamente abierta para permitir el ingreso irrestricto de agua de enfriamiento al circuito.",
+            "Cerrada al 50% para que el motor trabaje a mayor temperatura de combustión.",
+            "Cerrada por completo para evitar que ingrese agua sucia del puerto.",
+            "Se abre únicamente cuando la alarma sonora de recalentamiento se activa."
           ],
           correct: 0,
-          exp: "Al dejarlo regular unos minutos en ralentí, la bomba sigue refrigerando y la temperatura baja suavemente. Si se corta de golpe caliente, el calor residual deforma piezas del motor."
+          exp: "La esclusa de fondo de refrigeración debe abrirse siempre antes de encender el motor y permanecer abierta durante toda la navegación para abastecer a la bomba de agua."
+        },
+        {
+          q: "¿Cuál es el procedimiento técnico correcto para apagar un motor marino luego de navegar a régimen de crucero?",
+          options: [
+            "Dejarlo moderar en neutro (ralentí) durante 3 a 5 minutos para que el agua estabilice las temperaturas de cilindros y turbo antes de detenerlo.",
+            "Acelerar a fondo en vacío y cortar la llave de contacto de manera brusca.",
+            "Cerrar la esclusa de agua de mar mientras el motor sigue acelerando.",
+            "Poner marcha atrás violenta para que la inercia frene el cigüeñal."
+          ],
+          correct: 0,
+          exp: "Dejar el motor moderando permite que la bomba continúe circulando refrigerante y disipe el calor residual. Apagarlo de golpe en caliente produce deformaciones de tapa de cilindro y carbonización."
+        },
+        {
+          q: "¿Por qué es obligatorio cortar las baterías mediante el selector o llave general al desembarcar de la embarcación?",
+          options: [
+            "Para evitar descargas accidentales por consumo residual o riesgo de cortocircuitos que inicien incendios a bordo en ausencia de tripulación.",
+            "Para que el compás magnético no pierda su calibración de fábrica.",
+            "Para evitar que el motor pierda la memoria de inyección electrónica.",
+            "Para impedir que las luces de navegación se enciendan solas por la luna."
+          ],
+          correct: 0,
+          exp: "Cortar la llave general aísla la instalación eléctrica evitando que una falla en un cableado, sulfatación o humedad provoque chispas, incendios en la marina o descargue las baterías de arranque."
+        },
+        {
+          q: "¿Cuáles son repuestos de recambio frecuente que todo timonel previsor debe llevar a bordo para el motor?",
+          options: [
+            "Rotor de bomba de agua (impeller), filtros de combustible y aceite, correas de alternador/bomba y bujías (en motores nafteros).",
+            "Pistones de recambio, juego de aros de compresión y cigüeñal auxiliar.",
+            "Líquido de frenos, pastillas de freno y amortiguadores de popa.",
+            "Neumáticos de auxilio y compresor de aire de alta presión."
+          ],
+          correct: 0,
+          exp: "Los elementos más propensos a fallar en navegación son el impeller de la bomba de agua, una correa cortada o un filtro tapado por combustible sucio. Llevar repuestos y saber cambiarlos salva la travesía."
+        },
+        {
+          q: "Indique al menos tres herramientas indispensables que deben integrar la caja de a bordo para reparaciones de emergencia:",
+          options: [
+            "Pinza universal, destornilladores (plano y phillips), llave francesa o ajustables, cinta aisladora y llave sacabujías.",
+            "Taladro de banco, amoladora angular trifásica y soplete de corte.",
+            "Gato hidráulico de camión, pico de loro oxidado y formón de carpintero.",
+            "Tijera de podar, espátula de yeso y tenaza de herrador."
+          ],
+          correct: 0,
+          exp: "Una caja de herramientas marina debe contener llaves fijas de medidas comunes, llave francesa, pinza de fuerza, destornilladores, cinta vulcanizante, fusibles y navaja marinera."
         }
       ],
       u4_1: [
         {
-          q: "Ante la inminencia de un frente frío de 'Pampero' (viento fuerte del Sudoeste), ¿cuál es la regla de oro?",
+          q: "Ante los signos evidentes de la llegada inminente de un 'Pampero' en el Río de la Plata o litoral, ¿cuál es la regla de oro?",
           options: [
-            "Achicar paño con anticipación (poner tormentín/foque chico y tomar rizos en la mayor) ANTES de que peguen las primeras rachas.",
-            "Izar las velas más grandes para escapar a gran velocidad de la tormenta.",
-            "Fondear de inmediato por la popa con todas las velas cazadas al centro.",
-            "Soltar el timón y refugiarse en la cabina dejando el velero a la deriva."
+            "Achicar paño con anticipación (tomar rizos en la mayor y colocar tormentín o foque chico) ANTES de que impacten las primeras ráfagas.",
+            "Izar toda la vela posible (spinnaker o genoa 1) para escapar navegando a alta velocidad.",
+            "Fondear por la popa con todas las velas cazadas a crujía.",
+            "Mantener el rumbo a motor ignorando el viento por ser una brisa pasajera."
           ],
           correct: 0,
-          exp: "El Pampero entra con rachas muy repentinas y violentas del SW. Cambiar velas o tomar rizos con el viento encima es peligroso; la maniobra debe hacerse con anticipación."
+          exp: "El Pampero es un frente frío violento que irrumpe con rachas tempestuosas del SW. Cambiar velas o rizar con el vendaval encima es peligrosísimo; la maniobra de reducción de paño debe anticiparse."
         },
         {
-          q: "¿Qué comportamiento de la aguja del barómetro aneroide anuncia la llegada de mal tiempo o temporal?",
+          q: "¿Qué variación de la aguja del barómetro es el anuncio más seguro de la aproximación de un frente de tormenta severo?",
           options: [
-            "Una caída rápida y pronunciada de la presión atmosférica (más de 1 a 2 hPa por hora).",
-            "Una presión que se mantiene completamente fija en 1.013 hPa sin oscilar.",
-            "Una subida lenta y sostenida de la presión durante un día despejado.",
-            "Una oscilación suave que coincida con el movimiento de las olas."
+            "Una caída rápida y pronunciada de la presión atmosférica (más de 1 a 2 hPa o milibares por hora).",
+            "Una aguja completamente inmóvil clavada en 1.013 hPa durante días de sol.",
+            "Un aumento sostenido y lento de la presión durante varios días.",
+            "Una variación cíclica suave que coincida con las mareas oceánicas."
           ],
           correct: 0,
-          exp: "Una caída brusca y sostenida en la presión barométrica es el aviso meteorológico más claro de que un centro de baja presión o tormenta severa se aproxima."
+          exp: "La caída vertical del barómetro indica la llegada de un profundo centro de baja presión o una línea de inestabilidad frontal con vientos duros y tormentas eléctricas."
         },
         {
-          q: "¿Qué condiciones meteorológicas y de marea produce típicamente una 'Sudestada' en el Río de la Plata?",
+          q: "¿Qué características de viento, cielo y nivel del río definen típicamente al fenómeno de la 'Sudestada' en el Río de la Plata?",
           options: [
-            "Vientos sostenidos del Sudeste, cielo cubierto con lloviznas y una gran crecida en las aguas del río.",
-            "Vientos calurosos del Noroeste con bajante extrema de la marea.",
-            "Cielo totalmente despejado y ausencia de olas durante semanas.",
-            "Ráfagas cortas de 5 minutos seguidas de sol radiante."
+            "Vientos fuertes y persistentes del Sudeste (SE), cielo cubierto con lloviznas continuas y una pronunciada creciente que inunda zonas bajas.",
+            "Vientos cálidos del Noroeste con cielo despejado y bajante extrema de las aguas.",
+            "Calma chicha total y nieblas espesas durante el mediodía.",
+            "Ráfagas secas del Sudoeste seguidas de cielo despejado y frío seco."
           ],
           correct: 0,
-          exp: "La Sudestada sopla del SE en contra de la salida de las aguas del estuario, represando el río y generando crecidas notables ('marea meteorológica') e inundaciones costeras."
+          exp: "El viento del SE sopla en sentido contrario al desagüe natural del Río de la Plata hacia el océano, represando las aguas y provocando crecidas extraordinarias e inundaciones costeras."
+        },
+        {
+          q: "¿Cuáles son las tres variables físicas fundamentales cuya combinación determina el estado del tiempo y los fenómenos atmosféricos?",
+          options: [
+            "Temperatura, Presión atmosférica y Humedad.",
+            "Salinidad, Visibilidad y Profundidad del fondo.",
+            "Gravedad, Densidad magnética y Latitud geográfica.",
+            "Luminosidad, Altitud de crucero y Rumbo del barco."
+          ],
+          correct: 0,
+          exp: "El estado de la atmósfera y el clima se rigen por la interacción de tres factores medibles: Temperatura (termómetro), Presión (barómetro) y Humedad relativa (higrómetro)."
+        },
+        {
+          q: "¿Qué son las 'isobaras' en una carta meteorológica sinóptica y qué indica su cercanía mutua?",
+          options: [
+            "Líneas que unen puntos de igual presión atmosférica; cuanto más juntas están, mayor es el gradiente de presión y más fuerte será el viento.",
+            "Líneas que unen puntos de igual profundidad submarina en el lecho del río.",
+            "Líneas que marcan la dirección de la corriente de marea en bajamar.",
+            "Líneas de igual temperatura en la superficie del agua del mar."
+          ],
+          correct: 0,
+          exp: "Las isobaras unen presiones iguales. Un gradiente apretado (isobaras muy juntas) equivale a una pendiente abrupta de presión, generando vientos intensos o temporales."
+        },
+        {
+          q: "¿Cuál es el tipo de nube de mayor desarrollo vertical que se asocia directamente con tormentas eléctricas violentas, chubascos y turbonadas?",
+          options: [
+            "Cumulonimbus (Cb).",
+            "Cirrus (Ci).",
+            "Altocumulus (Ac).",
+            "Stratocumulus (Sc)."
+          ],
+          correct: 0,
+          exp: "El Cumulonimbus es una torre nubosa de gran desarrollo vertical (puede superar los 12 km de altura), con forma de yunque en la cima, causante de rayos, granizo y ráfagas destructivas."
+        },
+        {
+          q: "¿Cómo se denominan las brisas térmicas costeras locales y en qué dirección soplan de día y de noche?",
+          options: [
+            "Virazón: sopla desde el agua hacia la tierra durante la tarde; Terral: sopla desde la tierra hacia el agua durante la noche/madrugada.",
+            "Virazón: viento polar del sur; Terral: viento tropical del norte.",
+            "Terral sopla del agua de día y Virazón sopla de la costa al mediodía.",
+            "Ambas soplan en la misma dirección sin importar la temperatura del suelo."
+          ],
+          correct: 0,
+          exp: "De día la tierra se calienta más rápido que el agua, el aire sube y el agua envía aire fresco a tierra (Virazón). De noche la tierra se enfría más rápido y el viento invierte su sentido hacia el agua (Terral)."
+        },
+        {
+          q: "¿Qué mide la 'Escala de Beaufort' y en qué basa su clasificación práctica en el mar?",
+          options: [
+            "Mide la fuerza del viento (de fuerza 0 a 12) clasificándolo por los efectos observados sobre la superficie del agua y el estado del mar.",
+            "Mide la altura exacta de las olas en metros mediante un sensor submarino.",
+            "Mide la velocidad de avance de los frentes fríos en nudos terrestres.",
+            "Mide la temperatura del aire en grados Fahrenheit a nivel del mar."
+          ],
+          correct: 0,
+          exp: "Creada por el almirante Sir Francis Beaufort, clasifica el viento desde calma (fuerza 0: mar como un espejo) hasta temporal huracanado (fuerza 12: mar blanco de espuma y aire lleno de rociones)."
         }
       ],
       u4_2: [
         {
-          q: "Navegando de noche, ¿cuáles son los colores y sectores de las luces de costado según el RIPA?",
+          q: "¿Cuáles son los sectores angulares de visibilidad de las luces de navegación reglamentarias según el RIPA?",
           options: [
-            "Estribor = Verde (derecha) y Babor = Rojo (izquierda), cubriendo 112,5° cada una desde la proa.",
-            "Estribor = Rojo y Babor = Verde, cubriendo 180° cada una.",
-            "Ambas luces son blancas destellantes instaladas en la popa.",
-            "Amarilla a estribor y Azul a babor visibles en 360 grados todo horizonte."
+            "Luces de costado (verde y roja): 112,5° cada una; Luz de tope blanca: 225°; Luz de alcance blanca: 135°.",
+            "Luces de costado: 180° cada una; Luz de tope: 360°; Luz de alcance: 90°.",
+            "Todas las luces cubren 360 grados todo horizonte alrededor del barco.",
+            "Luces de costado: 90° hacia proa; Luz de tope: 112,5°; Luz de alcance: 45°.",
+        {
+          q: "¿Qué territorios componen la Región de Boyado B de IALA y en qué se diferencian fundamentalmente sus marcas laterales de la Región A?",
+          options: [
+            "La Región B abarca toda América, Japón, Corea y Filipinas (al entrar a puerto: babor verde y estribor rojo - regla SIR). La Región A abarca Europa, África, Australia y resto de Asia (al entrar: babor rojo y estribor verde).",
+            "La Región B solo se aplica en lagos y ríos interiores de agua dulce de Europa central.",
+            "En la Región B todas las boyas laterales son amarillas y en la Región A son blancas y negras.",
+            "Argentina pertenece a la Región A de IALA por convención antártica."
           ],
           correct: 0,
-          exp: "¡Regla básica! Estribor = Verde; Babor = Rojo. Cada luz cubre desde la proa hasta 22,5° a popa del través de su banda correspondiente (112,5°)."
+          exp: "El sistema marítimo IALA divide al planeta en dos regiones: la Región B (América entera, Japón, Corea y Filipinas), donde al ENTRAR a puerto la boya de estribor es roja y cónica, y la de babor es verde y cilíndrica (regla SIR: Saliendo Izquierda Roja). En la Región A los colores están invertidos."
         },
         {
-          q: "¿Qué sectores del horizonte cubren la Luz de Tope y la Luz de Alcance en un buque a motor?",
+          q: "Navegando por un canal balizado según el Sistema IALA B, nos aproximamos a una boya con casco cilíndrico verde y marca de tope cilíndrica. ¿Qué nos indica al entrar a puerto o remontar el río?",
           options: [
-            "Luz de tope: blanca hacia proa de 225°. Luz de alcance: blanca en popa de 135°.",
-            "Luz de tope: roja de 360°. Luz de alcance: verde de 180°.",
-            "Ambas cubren 90 grados apuntando directamente hacia el fondo del río.",
-            "Luz de tope es amarilla y luz de alcance es roja destellante."
+            "Indica el límite de babor del canal navegable y debe dejarse pasar por la banda de babor.",
+            "Indica el límite de estribor del canal navegable y debe dejarse por la banda de estribor.",
+            "Indica peligro aislado de bajo fondo y no se puede navegar a menos de 500 metros.",
+            "Señala el centro de aguas seguras de libre navegación."
           ],
           correct: 0,
-          exp: "La luz de tope blanca (225° proel) sumada a la luz de alcance blanca (135° popel) completan los 360° del horizonte alrededor del barco."
+          exp: "En IALA B (entrando a puerto o remontando río): Babor = Casco verde, marca de tope cilíndrica verde, y luz verde con cualquier ritmo de destellos. Se debe dejar sobre la banda de babor de la embarcación."
         },
         {
-          q: "¿Qué señales reglamentarias debe exhibir un buque que ha quedado 'Sin Gobierno' (averiado e incapaz de maniobrar)?",
+          q: "En un canal navegable IALA B nos encontramos con una boya de bifurcación con franjas horizontales rojas y verdes. ¿Qué ritmo característico emite su luz y cómo sabemos cuál es el canal principal?",
           options: [
-            "De noche: dos luces rojas verticales todo horizonte. De día: dos bolas negras en línea vertical.",
-            "De noche: tres luces verdes en triángulo. De día: un cono negro hacia arriba.",
-            "De noche: una luz blanca destellante continua. De día: una bandera roja en el estay.",
-            "De noche: luces de costado parpadeando. De día: tres banderas cuadradas azules."
+            "Emite una luz verde o roja con un grupo compuesto de destellos (2+1). El color de la franja superior o predominante indica si el canal principal continúa a estribor o a babor.",
+            "Emite una luz blanca continua intermitente sin pausa indicando peligro inminente.",
+            "Emite 4 destellos amarillos rápidos cada 5 segundos.",
+            "Emite una señal acústica continua de niebla y no posee señal luminosa."
           ],
           correct: 0,
-          exp: "RIPA Regla 27: Buque sin gobierno = de noche 2 luces rojas verticales ('rojo sobre rojo = capitán en remojo / sin gobierno'); de día, dos bolas negras en vertical."
+          exp: "Las boyas de bifurcación indican que el canal se divide. Su luz característica es compuesta de destellos en grupo (2+1), verde o roja. La franja ancha horizontal superior indica el canal principal o preferido."
+        },
+        {
+          q: "¿Cómo se identifica inequívocamente una boya de 'Peligro Aislado' tanto de día como de noche según el sistema IALA?",
+          options: [
+            "De día: franjas horizontales negras y rojas con marca de tope de 2 esferas negras superpuestas. De noche: luz blanca con grupo de 2 destellos (Fl(2)).",
+            "De día: franjas verticales rojas y blancas con 1 esfera roja. De noche: luz isofásica blanca.",
+            "De día: casco amarillo con marca de tope en forma de X. De noche: luz amarilla fija.",
+            "De día: casco verde cónico. De noche: luz verde rápida continua."
+          ],
+          correct: 0,
+          exp: "Peligro Aislado marca un obstáculo puntual (roca, casco a pique) con aguas navegables a su alrededor. Se asocia con el número 2: 2 esferas negras de tope, franjas negras y rojas, y de noche luz blanca de 2 destellos en grupo. Se debe pasar dándole buen resguardo."
+        },
+        {
+          q: "¿Cuáles son las características visuales y lumínicas de una marca de 'Aguas Seguras' (o de recalada)?",
+          options: [
+            "Casco con franjas VERTICALES rojas y blancas, marca de tope de 1 esfera roja, y luz blanca isofásica, de ocultaciones, 1 destello largo cada 10 s o letra Morse 'A' (.-).",
+            "Casco con franjas horizontales amarillas y negras con dos conos hacia arriba.",
+            "Casco rojo uniforme con cono rojo y luz roja destellante rápida.",
+            "Casco azul con franjas diagonales blancas y luz verde continua."
+          ],
+          correct: 0,
+          exp: "Aguas Seguras indica que por esa zona se puede navegar libremente (generalmente marca el inicio o eje del canal de entrada a puerto). Es la única boya con franjas verticales (rojas y blancas). Su tope es 1 esfera roja y su luz blanca puede ser isofásica, Morse 'A' (destello corto y largo) o destello largo c/10s."
+        },
+        {
+          q: "¿Qué función cumplen las boyas de 'Señales Especiales' y cómo se reconocen según IALA?",
+          options: [
+            "Indican zonas especiales de vertederos, cables submarinos, tomas de agua o recreación; tienen casco completamente amarillo, marca de tope en 'X' amarilla y luz amarilla con cualquier ritmo.",
+            "Indican que el canal está clausurado por hielo o crecida extraordinaria.",
+            "Son boyas de uso exclusivo para embarcaciones de guerra y prefectura con luz azul.",
+            "Señalan la presencia de buzos sumergidos mediante casco a cuadros blancos y negros."
+          ],
+          correct: 0,
+          exp: "Las señales especiales no guían la derrota sino zonas de configuración o actividades especiales (vertederos, cables submarinos, zonas de ejercicios militares, etc.). Son completamente AMARILLAS (casco, aspa en 'X' de tope y luz amarilla)."
+        },
+        {
+          q: "En las Marcas Cardinales, ¿cuál es la regla mnemotécnica del 'Reloj' (12, 3, 6 y 9) para recordar la cantidad de destellos de su luz blanca?",
+          options: [
+            "Norte = 12 (destellos continuos Q o VQ); Este = 3 (3 destellos); Sur = 6 (6 destellos cortos + 1 largo); Oeste = 9 (9 destellos).",
+            "Norte = 1 destello; Este = 2 destellos; Sur = 3 destellos; Oeste = 4 destellos.",
+            "Norte = 6 destellos; Este = 9 destellos; Sur = 12 destellos; Oeste = 3 destellos.",
+            "Todas las cardinales tienen la misma cantidad de destellos pero varían en color de luz."
+          ],
+          correct: 0,
+          exp: "La nemotecnia del reloj relaciona las posiciones horarias con los cuadrantes: Norte (arriba, 12 horas = destellos rápidos continuos Q/VQ); Este (a la derecha, 3 horas = 3 destellos); Sur (abajo, 6 horas = 6 destellos cortos + 1 destello largo para no confundirla); Oeste (a la izquierda, 9 horas = 9 destellos)."
+        },
+        {
+          q: "¿Cómo se identifican y diferencian los conos de tope y franjas de casco entre una Marca Cardinal Este y una Marca Cardinal Oeste?",
+          options: [
+            "Este: dos conos opuestos por la base (<>), franjas negro-amarillo-negro (negro en extremos); Oeste: dos conos opuestos por la punta/vértice (><), franjas amarillo-negro-amarillo (negro al centro).",
+            "Este: dos conos hacia arriba; Oeste: dos conos hacia abajo.",
+            "Este: conos amarillos hacia adentro; Oeste: conos rojos hacia afuera.",
+            "Ambas tienen conos idénticos pero el Este lleva luz verde y el Oeste luz roja."
+          ],
+          correct: 0,
+          exp: "En la Cardinal Este los conos se oponen por la base formando un rombo (<>), y el color negro va en los extremos (arriba y abajo). En la Cardinal Oeste los conos se enfrentan por sus vértices formando una copa o 'cintura' (><), y la franja negra va en el centro entre franjas amarillas."
+        }
+          ],
+          correct: 0,
+          exp: "Las luces de costado cubren desde proa hasta 22,5° a popa del través de cada banda (112,5°). El tope cubre 225° proel y la de alcance 135° popel, completando entre ambas los 360°."
+        },
+        {
+          q: "Navegando bajo el Sistema IALA B (Argentina y América), al ingresar a un canal navegable desde mar afuera hacia el puerto, ¿cómo son las boyas laterales?",
+          options: [
+            "Estribor: boya Roja cónica (luz roja); Babor: boya Verde cilíndrica (luz verde). Mnemotecnia: SIR (Saliendo Izquierda Roja).",
+            "Estribor: boya Verde cónica; Babor: boya Roja cilíndrica (como en Europa/IALA A).",
+            "Ambas bandas usan boyas amarillas con marcas en forma de equis (X).",
+            "Babor usa boyas negras con franjas rojas y estribor boyas a franjas blancas."
+          ],
+          correct: 0,
+          exp: "En IALA B (América): Entrando a puerto, se deja ROJO a Estribor y VERDE a Babor. Al salir se invierte: 'Saliendo Izquierda Roja' (SIR)."
+        },
+        {
+          q: "¿Cómo se reconoce visualmente y por su luz una 'Boya Cardinal Sur' del sistema IALA?",
+          options: [
+            "Pintada amarilla arriba y negra abajo; marca de tope: dos conos negros superpuestos con los vértices hacia abajo; luz blanca con 6 destellos rápidos + 1 destello largo.",
+            "Pintada totalmente de negro con una esfera amarilla; luz verde continua.",
+            "Pintada a franjas verticales rojas y blancas; luz blanca isofásica.",
+            "Dos conos con las bases enfrentadas; luz roja de 3 destellos."
+          ],
+          correct: 0,
+          exp: "Boya Cardinal Sur: señala que las aguas navegables y seguras están al SUR de la boya. Sus conos apuntan hacia abajo (Sur) y su ritmo de luz recuerda la posición de las 6 en el reloj: 6 destellos + 1 largo."
+        },
+        {
+          q: "¿Qué características de color, marca de tope y luz identifican a una marca de 'Peligro Aislado'?",
+          options: [
+            "Color negro con una o más franjas horizontales rojas; marca de tope: dos esferas (balones) negras superpuestas; luz blanca con grupo de 2 destellos.",
+            "Color amarillo puro con una cruz de San Andrés al tope; luz amarilla fija.",
+            "Franjas verticales rojas y blancas con una esfera roja; luz blanca de destellos cortos.",
+            "Color verde manzana con un cono invertido; luz verde de 4 destellos."
+          ],
+          correct: 0,
+          exp: "La marca de peligro aislado indica un obstáculo puntual (roca, casco a pique) que tiene aguas navegables a su alrededor. Se recuerda por '2 esferas = grupo de 2 destellos blancos'."
+        },
+        {
+          q: "¿Qué indica una boya con franjas verticales rojas y blancas y una esfera roja de tope?",
+          options: [
+            "Marca de 'Aguas Seguras' (o de recalada): indica que hay aguas navegables en todo su derredor y suele marcar el inicio de un canal o recalada.",
+            "Indica un buque petrolero hundido con pérdida de combustible.",
+            "Señala una zona de ejercicios de tiro militar prohibida a la navegación.",
+            "Marca el veril peligroso de estribor de un canal poco profundo."
+          ],
+          correct: 0,
+          exp: "Las franjas verticales blancas y rojas marcan aguas seguras alrededor. Es la clásica boya de recalada donde se toma práctico o se inicia la aproximación al canal de entrada."
+        },
+        {
+          q: "¿Qué función tienen las boyas o balizas pintadas de color amarillo con una 'X' (cruz de San Andrés) como marca de tope?",
+          options: [
+            "Señales especiales: indican zonas de recreo, cables o emisarios submarinos, áreas militares, zonas de refulado o fondeaderos especiales.",
+            "Señalan canales preferidos para buques de gran calado comercial.",
+            "Advierten la presencia de tiburones u olas gigantescas.",
+            "Indican la línea de frontera internacional entre dos países ribereños."
+          ],
+          correct: 0,
+          exp: "Las marcas especiales son amarillas con marca 'X' y luz amarilla. No tienen por objeto principal guiar la navegación, sino señalar zonas o configuraciones especiales de interés."
+        },
+        {
+          q: "¿En qué se diferencia una luz de 'destellos' de una luz de 'ocultaciones' y qué significa una luz 'isofásica'?",
+          options: [
+            "Destellos: la luz dura menos que la oscuridad; Ocultaciones: la luz dura más que el eclipse oscuro; Isofásica: la luz y la oscuridad duran exactamente lo mismo.",
+            "Destellos es de color rojo y ocultaciones es de color verde.",
+            "Isofásica significa que la luz cambia de color cada cinco segundos.",
+            "Destellos es para faros de tierra y ocultaciones para boyas de canal."
+          ],
+          correct: 0,
+          exp: "Destello: pulso de luz corto en medio de oscuridad larga. Ocultación: luz encendida continua que se apaga brevemente. Isofásica: 50% luz y 50% sombra con períodos idénticos."
+        },
+        {
+          q: "¿Qué señales visuales debe exhibir de noche y de día un buque o embarcación fondeada según el RIPA?",
+          options: [
+            "De noche: una luz blanca visible en 360° todo horizonte en la parte delantera; de día: una bola negra en el lugar más visible.",
+            "De noche: luces de navegación de costado y alcance; de día: dos conos unidos por la base.",
+            "De noche: dos luces rojas verticales; de día: una bandera cuadrada azul.",
+            "De noche: ninguna luz para no encandilar; de día: una cruz roja en proa."
+          ],
+          correct: 0,
+          exp: "Buque fondeado: de noche debe mostrar una luz blanca visible en todo el horizonte (360°). De día, se iza una esfera o balón negro en el estay de proa o lugar bien visible."
         }
       ],
       u4_3: [
         {
-          q: "Dos veleros navegan a vela con riesgo de abordaje y reciben el viento por bandas diferentes. ¿Quién tiene derecho de paso?",
+          q: "Dos veleros navegan a vela con riesgo de abordaje. ¿Cuáles son las dos reglas de preferencia fundamentales según el RIPA?",
           options: [
-            "El velero amurado a Estribor mantiene su rumbo; el amurado a Babor debe apartarse y maniobrar.",
-            "El velero amurado a Babor tiene preferencia y el de Estribor debe virar.",
-            "El velero de mayor tamaño siempre tiene derecho de paso sobre el más pequeño.",
-            "Ambos veleros deben virar en redondo al mismo tiempo."
+            "1) Con amuras distintas: babor cede a estribor. 2) Con la misma amura: el velero que está a barlovento cede el paso al que está a sotavento.",
+            "1) El velero más grande siempre tiene paso sobre el más chico. 2) El que navega a motor tiene prioridad.",
+            "1) El que navega más rápido cede el paso. 2) El barco más antiguo mantiene el rumbo.",
+            "Ambos deben virar por avante simultáneamente en sentido opuesto.",
+        {
+          q: "Según la Regla 18 del RIPA, ¿cuál es el orden estricto de obligaciones entre categorías de buques (de mayor a menor prioridad de paso en navegación libre)?",
+          options: [
+            "1° Buque sin gobierno > 2° Maniobra restringida > 3° Dedicado a la pesca > 4° Buque de vela > 5° Buque de propulsión mecánica.",
+            "1° Buque de vela > 2° Propulsión mecánica > 3° Pesca > 4° Maniobra restringida > 5° Sin gobierno.",
+            "1° Propulsión mecánica > 2° Vela > 3° Pesca > 4° Maniobra restringida > 5° Sin gobierno.",
+            "1° Maniobra restringida > 2° Vela > 3° Pesca > 4° Sin gobierno > 5° Propulsión mecánica."
           ],
           correct: 0,
-          exp: "RIPA Regla 12: 'Babor cede a Estribor'. El velero que recibe el viento por babor debe mantenerse apartado del derrotante que navega amurado a estribor."
+          exp: "RIPA Regla 18: Los buques de propulsión mecánica deben apartarse de veleros, pesqueros, barcos con maniobra restringida y sin gobierno. Un velero solo tiene preferencia sobre los barcos a motor, pero debe ceder el paso a pesqueros en faena, maniobra restringida y sin gobierno."
         },
         {
-          q: "Dos veleros reciben el viento por la MISMA banda navegando con riesgo de colisión. ¿Quién tiene la obligación de maniobrar?",
+          q: "Dos barcos de propulsión mecánica navegan de vuelta encontrada (de frente o casi de frente) con riesgo de colisión. ¿Cómo deben maniobrar?",
           options: [
-            "El velero que está a Barlovento (más al viento) debe apartarse del que está a Sotavento.",
-            "El velero que está a Sotavento debe apartarse del que está a Barlovento.",
-            "El velero que navegue a mayor velocidad debe ceder el paso.",
-            "El velero que tenga velas de proa más grandes tiene la prioridad."
+            "Cada uno caerá a su propio estribor, de modo que pasen babor con babor.",
+            "Cada uno caerá a su babor para pasar estribor con estribor a máxima distancia.",
+            "El de menor eslora da marcha atrás y el otro mantiene su rumbo constante.",
+            "Cae a babor el que navega a favor de corriente y a estribor el que remonta."
           ],
           correct: 0,
-          exp: "RIPA Regla 12: Con viento por la misma banda, 'Barlovento cede a Sotavento', ya que el barco situado a barlovento tiene mejor capacidad de maniobra."
+          exp: "RIPA Regla 14: En situación de vuelta encontrada entre dos buques a motor, cada uno de ellos caerá a estribor para pasar por la banda de babor del otro."
         },
         {
-          q: "En el Sistema de Balizamiento IALA B (Argentina y América), al ENTRAR a puerto desde el mar, ¿cómo se identifican las boyas?",
+          q: "Dos barcos de propulsión mecánica navegan en rumbos que se cruzan con riesgo de abordaje. ¿Cuál de ellos tiene la obligación de apartarse y cómo debe actuar?",
           options: [
-            "A babor boya Verde (marca cilíndrica); a estribor boya Roja (marca cónica). Regla SIR: Saliendo, Izquierda Roja.",
-            "A babor boya Roja y a estribor boya Verde (como en Europa / Sistema IALA A).",
-            "Todas las boyas laterales son amarillas con destellos blancos continuos.",
-            "A estribor boya a franjas verticales blancas y negras y a babor boya azul reflectiva."
+            "El buque que tenga al otro por su propia banda de estribor se mantendrá apartado de su derrota y, si las circunstancias lo permiten, evitará cortarle la proa.",
+            "El buque que navegue a mayor velocidad tiene derecho de paso absoluto.",
+            "El buque más grande tiene preferencia y el más pequeño debe dar marcha atrás.",
+            "Ambos buques deben reducir velocidad y mantener sus rumbos invariables."
           ],
           correct: 0,
-          exp: "En IALA B usamos la regla mnemotécnica SIR: 'Saliendo, Izquierda Roja'. Por lo tanto, al ENTRAR a puerto: Estribor = Roja (cono) y Babor = Verde (cilindro)."
+          exp: "RIPA Regla 15: En situación de cruce a motor, el buque que tenga al otro por su costado de estribor debe apartarse de su camino y evitar cortarle la proa (maniobrando con anticipación cayendo a estribor o pasando por su popa)."
+        },
+        {
+          q: "Una embarcación alcanza a otra desde un sector situado a más de 22,5° a popa del través (sector de la luz de alcance). ¿Qué obligación impone el RIPA?",
+          options: [
+            "Todo buque que alcance a otro se mantendrá siempre apartado de la derrota del buque alcanzado (sea a vela o a motor, y puede pasarlo por cualquiera de las dos bandas con seguridad).",
+            "El buque alcanzado debe reducir marcha y cambiar de rumbo para ceder el paso.",
+            "Si el alcanzante es un velero y el alcanzado es a motor, el buque a motor debe apartarse de inmediato.",
+            "Solo existe obligación de apartarse si el sobrepaso se efectúa por la banda de estribor."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 13: El buque alcanzante SIEMPRE tiene la obligación de mantenerse apartado del buque alcanzado. Esta regla prevalece sobre cualquier otra categoría (incluso un velero alcanzando a un barco a motor debe apartarse)."
+        },
+        {
+          q: "Además de las luces de costado (roja y verde 112,5°) y luz de alcance (blanca 135°), ¿qué luces facultativas verticales puede exhibir un velero en el tope del palo y cuál es su prohibición?",
+          options: [
+            "Puede exhibir dos luces todo horizonte en línea vertical: ROJA la superior y VERDE la inferior; está terminantemente prohibido encenderlas si ya se utiliza el farol combinado tricolor.",
+            "Puede llevar una luz blanca continua y una luz amarilla de destellos.",
+            "Debe llevar tres luces rojas verticales fijas en la cruceta inferior.",
+            "Puede llevar una luz verde en proa y una roja en popa."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 25(c): Un velero en navegación puede exhibir en el tope del palo dos luces todo horizonte en línea vertical: ROJA la superior y VERDE la inferior ('rojo sobre verde'). No deben combinarse con el farol tricolor de tope."
+        },
+        {
+          q: "¿Cuál es la diferencia obligatoria de luces de tope en buques de propulsión mecánica según su eslora sea menor o mayor a 50 metros?",
+          options: [
+            "Menores de 50 m: llevan 1 sola luz blanca de tope a proa (225°); Mayores de 50 m: están obligados a llevar una SEGUNDA luz blanca de tope a popa y más alta que la de proa.",
+            "Menores de 50 m no llevan luces de tope; mayores de 50 m llevan dos luces rojas.",
+            "Mayores de 50 m llevan solo una luz blanca todo horizonte en el centro.",
+            "Menores de 50 m llevan dos luces de tope verdes y mayores dos blancas."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 23: Todo buque de propulsión mecánica exhibe luces de banda, alcance y una luz de tope a proa. Los buques de 50 m o más de eslora están obligados a exhibir una segunda luz de tope a popa y a mayor altura que la proel."
+        },
+        {
+          q: "¿Qué luces puede exhibir una lancha o embarcación de propulsión mecánica menor de 7 metros cuya velocidad máxima no supere los 7 nudos?",
+          options: [
+            "Puede exhibir únicamente una luz blanca todo horizonte visible en 360°, y si es posible, luces de costado.",
+            "Debe llevar dos luces de tope blancas fijas y una luz de remolque amarilla.",
+            "Solo está obligada a encender una linterna de mano verde cuando se acerque otro barco.",
+            "Debe llevar farol tricolor en el mástil y dos luces rojas verticales."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 23(d): Los barcos de propulsión mecánica de eslora inferior a 7 metros y cuya velocidad máxima no exceda de 7 nudos pueden exhibir simplemente una luz blanca todo horizonte (360°)."
+        },
+        {
+          q: "¿Qué luces de noche y qué marca diurna debe exhibir un buque 'Sin Gobierno' (incapaz de maniobrar por avería de timón o propulsión)?",
+          options: [
+            "De noche: DOS luces rojas todo horizonte en línea vertical (más bandas y alcance solo si lleva arrancada). De día: DOS esferas (bolas) negras superpuestas en línea vertical.",
+            "De noche: tres luces rojas verticales continuas. De día: una bandera roja con cruz blanca.",
+            "De noche: una luz blanca y una verde en proa. De día: un cono negro con vértice hacia abajo.",
+            "De noche: dos luces amarillas intermitentes. De día: dos rombos negros superpuestos."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 27: Buque sin gobierno exhibe de noche dos luces rojas todo horizonte verticales ('rojo sobre rojo = no hay gobierno'). Si lleva arrancada en el agua, agrega bandas y alcance. De día exhibe dos bolas negras verticales."
+        },
+        {
+          q: "¿Cuáles son las luces de noche y marcas de día que identifican a un buque con 'Capacidad de Maniobra Restringida'?",
+          options: [
+            "De noche: tres luces todo horizonte verticales: Roja superior - Blanca central - Roja inferior. De día: Esfera - Rombo - Esfera en línea vertical.",
+            "De noche: dos luces verdes verticales. De día: tres banderas amarillas.",
+            "De noche: tres luces blancas verticales. De día: dos conos unidos por la base.",
+            "De noche: dos luces rojas verticales. De día: tres rombos negros."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 27(b): Buque con maniobra restringida exhibe tres luces verticales todo horizonte: Roja - Blanca - Roja. De día exhibe la combinación vertical: Bola negra - Rombo negro - Bola negra."
+        },
+        {
+          q: "Al aproximarse de noche a una DRAGA trabajando en el canal que tiene una banda obstruida, ¿cómo indica visualmente qué banda está libre para pasar y cuál obstruida?",
+          options: [
+            "Banda de paso libre: dos luces verdes todo horizonte verticales. Banda obstruida: dos luces rojas todo horizonte verticales (además de sus tres luces de maniobra restringida roja-blanca-roja).",
+            "Banda libre: luz blanca destellante. Banda obstruida: luz amarilla fija.",
+            "Banda libre: dos luces rojas verticales. Banda obstruida: dos luces verdes verticales.",
+            "Banda libre: farol tricolor a babor. Banda obstruida: luz blanca todo horizonte."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 27(d): Una draga u obra flotante con obstrucción exhibe: en la banda libre donde se puede pasar, DOS luces verdes verticales; en la banda obstruida donde no se debe pasar, DOS luces rojas verticales."
+        },
+        {
+          q: "¿Qué señales visuales (luces de noche y marcas diurnas) identifican a un buque VARADO de más de 12 metros de eslora?",
+          options: [
+            "De noche: las luces de fondeo que le correspondan más DOS luces rojas todo horizonte en vertical. De día: TRES esferas (bolas) negras en línea vertical.",
+            "De noche: tres luces rojas todo horizonte fijas. De día: dos conos negros unidos por el vértice.",
+            "De noche: una luz blanca a proa y una verde a popa. De día: una bandera negra triangular.",
+            "De noche: cuatro luces blancas fijas en cubierta. De día: un rombo negro con dos conos."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 30(d): Un buque varado exhibe las luces correspondientes a un buque fondeado y además dos luces rojas todo horizonte en vertical. De día exhibe tres bolas negras verticales ('tres bolas = varado')."
+        },
+        {
+          q: "Un velero navega con las velas desplegadas pero al mismo tiempo utiliza su motor para propulsarse durante el día. ¿Qué marca obligatoria debe exhibir?",
+          options: [
+            "Un cono negro con el vértice apuntando hacia abajo, ubicado a proa en el lugar más visible.",
+            "Una esfera negra en el estay de proa.",
+            "Un rombo negro bicónico en la cruceta de estribor.",
+            "Dos conos negros unidos por la base en el tope del mástil."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 25(e): Una embarcación que navegue a vela pero que use simultáneamente propulsión mecánica se considera buque a motor y debe exhibir en proa un cono negro con el vértice hacia abajo."
+        },
+        {
+          q: "¿Qué señal acústica debe emitir una embarcación al aproximarse a un recodo o curva pronunciada de un río o canal donde la visibilidad está obstaculizada?",
+          options: [
+            "Una pitada prolongada de 4 a 6 segundos de duración, que debe ser respondida con otra pitada prolongada por cualquier embarcación que se aproxime en sentido contrario.",
+            "Dos pitadas cortas de 1 segundo de duración para avisar caída a babor.",
+            "Tres pitadas prolongadas seguidas de toques de campana continuos.",
+            "Cinco pitadas cortas y rápidas de advertencia."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 34(e): Al aproximarse a un recodo o canal ciego sin visibilidad, se emitirá una pitada prolongada (4 a 6 segundos). Cualquier buque que se aproxime dentro del alcance acústico responderá con una pitada de igual duración."
+        },
+        {
+          q: "¿Cuáles de las siguientes señales son reconocidas oficialmente por el RIPA (Anexo IV) como señales de socorro y necesidad de auxilio inmediato?",
+          options: [
+            "Bengala de mano roja, señal de humo naranja, disparos a intervalos de 1 minuto, radiotelefonía 'Mayday', brazos extendidos subiendo y bajando lentamente, y bandera cuadra con una esfera o bola arriba o abajo.",
+            "Farol tricolor encendido de día y dos pitadas cortas de silbato.",
+            "Bandera amarilla izada en la cruceta y encendido de luces de navegación de noche.",
+            "Toques de campana cada media hora y encendido de las luces de fondeo."
+          ],
+          correct: 0,
+          exp: "El Anexo IV del RIPA enumera las señales de socorro universales: Mayday en VHF/HF, cohetes con estrellas rojas o bengalas de mano rojas, humo naranja, fuegos de brea en cubierta, brazos abiertos subiendo y bajando, y bandera cuadra con bola negra."
+        },
+        {
+          q: "En comunicaciones náuticas por radio VHF, ¿qué significan respectivamente los códigos Q: QSL, QRV, QAP y QTH?",
+          options: [
+            "QSL: Comprendido / Acuse de recibo; QRV: Estoy preparado / listo; QAP: Quedo a la escucha en frecuencia; QTH: Posición geográfica.",
+            "QSL: Ceso transmisión; QRV: Interferencia; QAP: Hora exacta; QTH: Emergencia médica.",
+            "QSL: Quién me llama; QRV: Canal de trabajo; QAP: Hombre al agua; QTH: Rumbo compás.",
+            "QSL: Silencio de radio; QRV: Batería baja; QAP: Marea bajando; QTH: Fin de comunicado."
+          ],
+          correct: 0,
+          exp: "En el Código Q náutico: QSL = comprendido/recibido; QRV = estoy preparado/disponible; QAP = permanezco a la escucha en la frecuencia; QTH = mi posición geográfica o coordenadas."
+        },
+        {
+          q: "¿Qué significan en radiocomunicaciones los códigos Q: QRT, QTR, QRM, QRZ y QRA?",
+          options: [
+            "QRT: Ceso la transmisión / cierro estación; QTR: Hora exacta; QRM: Interferencia por otras transmisiones; QRZ: ¿Quién me llama?; QRA: Nombre o distintivo de la estación.",
+            "QRT: Solicito remolque; QTR: Temperatura; QRM: Motor averiado; QRZ: Señal débil; QRA: Puerto de destino.",
+            "QRT: Peligro de colisión; QTR: Ráfagas; QRM: Canal libre; QRZ: Mayday recibido; QRA: Matrícula de casco.",
+            "QRT: Cambio de guardia; QTR: Calado; QRM: Radar encendido; QRZ: Auxilio; QRA: Tipo de velero."
+          ],
+          correct: 0,
+          exp: "Código Q: QRT = cese de transmisión ('corto transmisión'); QTR = hora exacta; QRM = interferencia de otras estaciones; QRZ = ¿quién me está llamando?; QRA = nombre o indicativo de la estación."
+        },
+        {
+          q: "¿Cuáles son las señales distintivas de llamada (QRA) de las principales estaciones costeras de Prefectura Naval Argentina en el Río de la Plata y Delta?",
+          options: [
+            "Buenos Aires: L2G (Lima 2 Golf); Delta: L9O (Lima 9 Oscar); San Isidro: L5J (Lima 5 Juliet); San Fernando: L5K (Lima 5 Kilo); Tigre: L5M (Lima 5 Mike); Olivos: L5I (Lima 5 India); La Plata: L5F (Lima 5 Foxtrot); Martín García: L5P (Lima 5 Papa).",
+            "Buenos Aires: BUE-1; Delta: DEL-2; San Isidro: ISI-3; San Fernando: FER-4; Tigre: TIG-5.",
+            "Buenos Aires: L1A; Delta: L2B; San Isidro: L3C; San Fernando: L4D; Tigre: L5E.",
+            "Buenos Aires: PNA-01; Delta: PNA-02; San Isidro: PNA-03; San Fernando: PNA-04."
+          ],
+          correct: 0,
+          exp: "Los distintivos internacionales de llamada (QRA) de las costeras PNA son fundamentales para radiomodular en VHF: L2G Buenos Aires, L9O Delta, L5J San Isidro, L5K San Fernando, L5M Tigre, L5I Olivos, L5F La Plata, L5P Martín García, L5H Quilmes y L5Z Paranacito."
+        }
+          ],
+          correct: 0,
+          exp: "RIPA Regla 12: Si reciben el viento por bandas diferentes, cede quien lo recibe por babor. Si lo reciben por la misma banda, el de barlovento (más al viento) debe apartarse del de sotavento."
+        },
+        {
+          q: "Dos embarcaciones de propulsión mecánica navegan en rumbos de colisión cruzados. ¿Quién tiene la obligación de maniobrar y apartarse?",
+          options: [
+            "La embarcación que tiene a la otra por su costado de ESTRIBOR debe apartarse de la derrota, evitando cruzarle por proa.",
+            "La embarcación que tiene a la otra por su costado de babor debe acelerar.",
+            "Ambas deben detener los motores y fondear inmediatamente.",
+            "La embarcación que navega a menor velocidad tiene la obligación de dar marcha atrás."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 15: En situación de cruce a motor, el buque que ve al otro por su derecha (estribor) debe maniobrar y mantenerse apartado, cayendo a estribor para pasar por popa."
+        },
+        {
+          q: "Dos buques a motor navegan de vuelta encontrada (rumbo opuesto directo proa contra proa) con riesgo de colisión. ¿Qué deben hacer ambos?",
+          options: [
+            "Ambos deben caer a su derecha (estribor), de modo de pasar babor con babor a distancia segura.",
+            "Ambos deben caer a babor aumentando la velocidad de propulsión.",
+            "El buque de menor porte se aparta a estribor y el mayor mantiene su rumbo invariable.",
+            "Ambos buques deben fondear sus anclas de proa en el acto."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 14: Cuando dos buques a motor se aproximan proa con proa, ambos deben caer a estribor para que cada uno pase por la banda de babor del otro."
+        },
+        {
+          q: "¿Qué define a un 'buque alcanzante' según el RIPA y cuál es su obligación?",
+          options: [
+            "Todo buque que se aproxime a otro desde más de 22,5° a popa de su través; tiene la obligación de mantenerse SIEMPRE apartado del buque alcanzado.",
+            "El buque que navega a mayor velocidad en un canal y tiene prioridad absoluta de sobrepaso.",
+            "Cualquier velero que sobrepase a una lancha por la banda de babor.",
+            "El buque de rescate oficial que acude a una llamada de auxilio."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 13: El que alcanza siempre maniobra. De noche solo divisa la luz blanca de alcance (135°) del alcanzado. La obligación de apartarse rige cualquiera sea la propulsión."
+        },
+        {
+          q: "En un canal angosto o paso balizado, ¿qué regla rige para los veleros y embarcaciones menores de 20 metros frente a buques mercantes o de gran calado?",
+          options: [
+            "Las embarcaciones menores y veleros no deben entorpecer el tránsito seguro de buques que solo pueden navegar dentro del canal.",
+            "Los veleros tienen prioridad de paso absoluta sobre cualquier mercante o chata arenera.",
+            "Todas las embarcaciones deben circular por el centro exacto del canal sin recostarse a las orillas.",
+            "Los buques grandes deben esperar fuera del canal hasta que los yates deportivos completen su paseo."
+          ],
+          correct: 0,
+          exp: "RIPA Regla 9: Un velero o yate menor nunca debe obstaculizar a un buque restringido por su calado o remolcador en un canal angosto; debe navegar recostado sobre el límite de su estribor."
+        },
+        {
+          q: "¿Cuál es la frecuencia del Canal 16 de VHF marino y cuál es su uso reglamentario?",
+          options: [
+            "156,800 MHz; es el canal internacional de llamada, socorro y seguridad marítima; tras el contacto inicial se debe pasar a un canal de trabajo.",
+            "106,000 MHz; se utiliza exclusivamente para conversar entre familiares y amigos.",
+            "500 kHz; es el canal de música y entretenimiento costero.",
+            "121,500 MHz; se reserva únicamente para barcos de bandera extranjera."
+          ],
+          correct: 0,
+          exp: "El Canal 16 de VHF (156.800 MHz) es el canal de guardia permanente para llamadas de auxilio (Mayday), urgencia (Pan Pan) y contacto inicial. Está prohibido ocuparlo para charlas de rutina."
+        },
+        {
+          q: "¿A qué tipo de situaciones corresponden respectivamente las palabras 'MAYDAY', 'PAN PAN' y 'SECURITÉ' transmitidas por VHF?",
+          options: [
+            "MAYDAY: socorro por peligro grave e inminente para la vida/embarcación; PAN PAN: urgencia sin peligro inminente; SECURITÉ: seguridad de la navegación o aviso meteorológico.",
+            "MAYDAY: pedido de remolque ordinario; PAN PAN: aviso de regata; SECURITÉ: despedida de guardia.",
+            "MAYDAY: control de aduana; PAN PAN: prueba de micrófono; SECURITÉ: rescate de cabos caídos."
+          ],
+          correct: 0,
+          exp: "MAYDAY (del francés m'aider) = socorro vital inminente. PAN PAN (panne) = mensaje de urgencia que no amenaza la vida en el acto (ej. timón trabado en calma). SECURITÉ = aviso náutico o de mal tiempo."
+        },
+        {
+          q: "¿Cuáles son señales convencionales de socorro reconocidas internacionalmente para pedir auxilio?",
+          options: [
+            "Bengalas rojas de mano, cohetes con paracaídas rojo, humo naranja, grupo Morse SOS, izar bandera 'N' sobre 'C' y brazos subiendo y bajando lentamente.",
+            "Tocar tres bocinazos cortos seguidos y encender la luz de cortesía de cabina.",
+            "Izar una bandera argentina en la cruceta de babor y aplaudir fuertemente.",
+            "Pintar el casco del velero de color amarillo fosforescente."
+          ],
+          correct: 0,
+          exp: "Las señales de auxilio oficiales (Anexo IV del RIPA) incluyen pirotecnia roja/naranja, banderas N sobre C, cuadrado sobre círculo negro, llamada Mayday por radio y movimiento repetido de brazos."
+        },
+        {
+          q: "¿Por qué en los fuegos de Clase B (combustibles líquidos como nafta o gasoil) y Clase C (equipos eléctricos) está TERMINANTEMENTE PROHIBIDO usar agua a chorro?",
+          options: [
+            "Porque el agua dispersa el combustible líquido inflamable esparciendo el fuego, y conduce la electricidad provocando electrocuciones mortales.",
+            "Porque el agua enfría demasiado rápido el motor dañando la tapa de cilindros.",
+            "Porque el agua dulce descompone el polvo químico de los matafuegos secos.",
+            "Porque el agua atrae rayos durante las tormentas eléctricas."
+          ],
+          correct: 0,
+          exp: "El agua a chorro sobre nafta o aceite hace que el líquido combustible flote y se expanda en llamas. Sobre electricidad, conduce la corriente al operador. Se debe usar polvo químico ABC o CO2."
+        },
+        {
+          q: "¿Qué documentación debe llevar el timonel a bordo y qué establece el Convenio Internacional MARPOL sobre los residuos plásticos y oleosos?",
+          options: [
+            "Debe llevar DNI, Certificado Náutico Deportivo (carnet), Matrícula y Certificado de Seguridad. MARPOL prohíbe terminantemente arrojar plásticos y exige retener residuos oleosos a bordo.",
+            "Solo se exige carnet de conducir autos; MARPOL permite tirar basura plástica a más de tres millas de la costa.",
+            "Únicamente se necesita el boleto de compraventa del motor y el pago de patente municipal.",
+            "Los veleros están exentos de llevar documentos y normas ambientales por no usar motor."
+          ],
+          correct: 0,
+          exp: "A bordo es obligatorio portar DNI, carnet habilitante PNA vigente, matrícula del barco y certificado de seguridad. MARPOL y la ley 22.190 prohíben arrojar plásticos en cualquier circunstancia y derramar hidrocarburos."
         }
       ]
     };
